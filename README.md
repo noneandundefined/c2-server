@@ -1,8 +1,10 @@
-`C2-Server`
+# `C2-Server`
+
+open source (command and control server)
 
 ## Responsibility
 
-`The users of this software are solely responsible for its use. The project is provided "as is", without any guarantees. The developers are not responsible for:`
+The users of this software are solely responsible for its use. The project is provided "as is", without any guarantees. The developers are not responsible for:
 
 -   Improper use
 -   Violation of laws

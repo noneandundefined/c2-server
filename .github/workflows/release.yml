@@ -118,7 +118,7 @@ jobs:
                   body: |
                       # [${{ steps.version.outputs.version }}](https://github.com/noneandundefined/c2-server/tree/${{ steps.version.outputs.version }}) (${{ steps.date.outputs.date }})
 
-                      `The C&C server is introducing a new version.`
+                      The C&C server is introducing a new version `${{ steps.version.outputs.version }}`.
 
                       ## Enhancements
 
@@ -140,4 +140,4 @@ jobs:
                   next_version="v$major.$next_minor.x"
 
                   git checkout -b "$next_version"
-                  git push origin "$next_version"
+                  git push origin "$next_version" || git push origin "$next_version"

@@ -1,3 +1,24 @@
 package main
 
-func main() {}
+import (
+	"c2-server/lib"
+	modules "c2-server/modules"
+	"fmt"
+
+	"github.com/joho/godotenv"
+)
+
+func main() {
+	cache := lib.NewCache()
+	logger := lib.NewLogger()
+
+	server := modules.NewTCPServer(cache)
+
+	if err := godotenv.Load(); err != nil {
+		logger.Error(err.Error())
+	}
+
+	if err := server.StartServer(); err != nil {
+		logger.Error(fmt.Sprintf("Error starting server: %v", err))
+	}
+}

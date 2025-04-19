@@ -30,3 +30,4 @@ tmp/
 go/
 .cache/
 *.cache
+bin/

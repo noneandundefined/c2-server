@@ -1,0 +1,14 @@
+[Unit]
+Description=c2-bot
+After=network.target
+
+[Service]
+ExecStart=/home/youruser/c2-bot
+Restart=always
+User=youruser
+WorkingDirectory=/home/youruser/
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

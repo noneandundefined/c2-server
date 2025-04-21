@@ -3,10 +3,10 @@
 #include <stdio.h>
 #include <winsock2.h>
 
-#include "c2-bot.h"
-#include "c2-packet.h"
-#include "c2-ipgeo.h"
-#include "win-reestr.h"
+#include "c2_bot.h"
+#include "c2_packet.h"
+#include "c2_ipgeo.h"
+#include "win_reestr.h"
 
 #pragma comment(lib, "ws2_32.lib")
 

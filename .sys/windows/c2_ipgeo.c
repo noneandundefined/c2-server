@@ -6,7 +6,7 @@
 #include <string.h>
 #include <direct.h>
 
-#include "c2-ipgeo.h"
+#include "c2_ipgeo.h"
 
 #pragma comment(lib, "winhttp.lib")
 #pragma comment(lib, "iphlpapi.lib")

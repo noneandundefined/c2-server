@@ -1,11 +1,18 @@
 OUT_DIR = source
 
 SRC_MAIN = x86_x64.c
+<<<<<<< HEAD
 SRC_BOT = c2_bot.c
 SRC_IPGEO = c2_ipgeo.c
 SRC_PACKET = c2_packet.c
 SRC_WIN_REESTR = win_reestr.c
 SRC_WIN_APP = windows.c
+=======
+SRC_BOT = c2-bot.c
+SRC_IPGEO = c2-ipgeo.c
+SRC_PACKET = c2-packet.c
+SRC_WIN_REESTR = win-reestr.c
+>>>>>>> e41bbee0ff375698d1f333c2e5f76ecadc1c76de
 
 MAIN_OUT = $(OUT_DIR)/x86_x64.exe
 

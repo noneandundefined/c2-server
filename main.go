@@ -1,9 +1,9 @@
 package main
 
 import (
-	"c2-server/lib"
-	modules "c2-server/modules"
 	"fmt"
+	"icu/lib"
+	modules "icu/modules"
 
 	"github.com/joho/godotenv"
 )

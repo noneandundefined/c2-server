@@ -1,4 +1,4 @@
-# `C2-Server`
+# `I Control You`
 
 open source (command and control server)
 

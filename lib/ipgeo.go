@@ -1,7 +1,7 @@
 package lib
 
 import (
-	"c2-server/types"
+	"icu/common/types"
 	"fmt"
 	"io/ioutil"
 	"net"

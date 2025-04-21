@@ -1,4 +1,4 @@
-module c2-server
+module icu
 
 go 1.23.0
 

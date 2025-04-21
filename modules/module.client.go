@@ -3,6 +3,7 @@ package modules
 import (
 	"fmt"
 	"icu/common/constants"
+	"icu/common/types"
 	"icu/common/utils"
 	"icu/lib"
 	"net"
@@ -63,6 +64,12 @@ func (this *BotClient) parseData(socketBuf []byte) {
 
 	this.receiveBuf = receiveBufPool.Get().([]byte)[:0]
 	this.receiveBuf = append(this.receiveBuf, socketBuf...)
+
+	if len(socketBuf) == 1 && socketBuf[0] == 0xAA {
+		cache := this.cache.GetCache(utils.MacPrettyConvert(this.mac), "ipgeo").(types.IPGeo)
+		this.logger.Info(fmt.Sprintf("Bot (%s) is active client PC[%s (%f, %f)]", utils.MacPrettyConvert(this.mac), cache.IP, cache.Latitude, cache.Longitude))
+		return
+	}
 
 	packetType := this.receiveBuf[7]
 	switch packetType {

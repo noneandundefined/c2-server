@@ -73,7 +73,7 @@ func (this *Cache) SetCache(mac, unique string, cache interface{}, duration time
 		LastActivity: time.Now(),
 	})
 
-	this.logger.Cache(fmt.Sprintf("Set new cache for (%s) -> '%s'", mac, cache))
+	this.logger.Cache(fmt.Sprintf("Set new cache for (%s)", mac))
 }
 
 func (this *Cache) GetCache(mac string, unique string) interface{} {

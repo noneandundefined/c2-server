@@ -23,3 +23,10 @@ int hello_packet(SOCKET sock, const uint8_t* mac, const char* ipgeo_json) {
     free(buffer);
     return sent;
 }
+
+int keep_alive(SOCKET sock) {
+    unsigned char keep_alive_packet = 0xAA;
+    size_t sent = send(sock, (const char*)&keep_alive_packet, sizeof(keep_alive_packet), 0);
+
+    return sent;
+}

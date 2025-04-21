@@ -15,4 +15,6 @@ typedef struct {
 
 int hello_packet(SOCKET sock, const uint8_t* mac, const char* ipgeo_json);
 
+int keep_alive(SOCKET sock);
+
 #endif

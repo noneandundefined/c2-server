@@ -20,7 +20,16 @@ exe: $(MAIN_OUT)
 $(MAIN_OUT): $(SRC_MAIN)
 	@if not exist $(OUT_DIR) mkdir $(OUT_DIR)
 	$(CC) $(SRC_MAIN) -o $(MAIN_OUT) $(SRC_BOT) $(SRC_IPGEO) $(SRC_PACKET) $(SRC_WIN_REESTR) $(CFLAGS) $(LDFLAGS) $(HTTPFLAGS) $(LAPIFLAGS)
+<<<<<<< HEAD
 	$(CC) -std=c17 $(SRC_WIN_APP) -IC:\SDL3\x86_64-w64-mingw32\include -LC:\SDL3\x86_64-w64-mingw32\lib -o $(OUT_DIR)/windows_x86_x64.exe -Wall -lmingw32 -lSDL3 $(CFLAGS)
+=======
+
+ipgeo-test: $(OUT_DIR)/ipgeo.exe
+
+$(OUT_DIR)/ipgeo.exe: ipgeo.c
+	@if not exist $(OUT_DIR) mkdir $(OUT_DIR)
+	$(CC) ipgeo.c -o $(OUT_DIR)/ipgeo.exe -lwinhttp -liphlpapi
+>>>>>>> e41bbee (create new release v0.6.x -> and merge in main branch (#9))
 
 clean:
 	rm -f $(EXE_OUT) $(DLL_OUT)

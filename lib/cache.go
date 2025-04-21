@@ -1,8 +1,8 @@
 package lib
 
 import (
-	"c2-server/types"
 	"fmt"
+	"icu/common/types"
 	"sync"
 	"time"
 )

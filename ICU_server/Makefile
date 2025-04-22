@@ -11,10 +11,10 @@ check: fmt lint test
 	@echo "All checks passed!"
 build:
 	@echo "Running build..."
-	@go build -o bin/c2-server main.go
+	@go build -o bin/icu main.go
 
 test:
 	@go test -v ./...
 
 run: build
-	@./bin/c2-server
+	@./bin/icu

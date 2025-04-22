@@ -1,5 +1,5 @@
-#ifndef C2_PACKET_H
-#define C2_PACKET_H
+#ifndef ICU_PACKET_H
+#define ICU_PACKET_H
 
 #include <stdint.h>
 #include <winsock2.h>
@@ -14,5 +14,7 @@ typedef struct {
 #pragma pack(pop)
 
 int hello_packet(SOCKET sock, const uint8_t* mac, const char* ipgeo_json);
+
+int keep_alive(SOCKET sock);
 
 #endif

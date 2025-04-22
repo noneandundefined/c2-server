@@ -116,7 +116,7 @@ jobs:
                   tag_name: ${{ steps.version.outputs.version }}
                   name: '${{ steps.version.outputs.version }}'
                   body: |
-                      # [${{ steps.version.outputs.version }}](https://github.com/noneandundefined/c2-server/tree/${{ steps.version.outputs.version }}) (${{ steps.date.outputs.date }})
+                      # [${{ steps.version.outputs.version }}](https://github.com/noneandundefined/icu/tree/${{ steps.version.outputs.version }}) (${{ steps.date.outputs.date }})
 
                       The C&C server is introducing a new version `${{ steps.version.outputs.version }}`.
 
@@ -127,7 +127,7 @@ jobs:
                       ### Pull Requests
                       ${{ steps.changelog.outputs.changelog_pr }}
 
-                      [©c&c-server](https://github.com/noneandundefined/c2-server)
+                      [©c&icu](https://github.com/noneandundefined/icu)
 
             - name: Create new branch for next version
               run: |

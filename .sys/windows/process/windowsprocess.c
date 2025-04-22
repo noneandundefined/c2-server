@@ -3,7 +3,7 @@
 #include <shlobj.h>
 #include <stdio.h>
 
-#include "win_reestr.h"
+#include "windowsprocess.h"
 
 void add_to_reestr() {
     HKEY hKey;

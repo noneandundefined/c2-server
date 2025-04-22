@@ -1,6 +1,8 @@
 # `I Control You`
 
-open source (command and control server)
+<img src="https://github.com/noneandundefined/icu/blob/main/assets/icu_start?raw=true" align="center" />
+
+Open Source (command and control server). Designed to support bots, send commands, and implement DDL dependencies.
 
 ## Responsibility
 

@@ -1,5 +1,5 @@
-#ifndef C2_PACKET_H
-#define C2_PACKET_H
+#ifndef ICU_PACKET_H
+#define ICU_PACKET_H
 
 #include <stdint.h>
 #include <winsock2.h>

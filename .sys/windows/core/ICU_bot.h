@@ -1,5 +1,5 @@
-#ifndef C2_BOT_H
-#define C2_BOT_H
+#ifndef ICU_BOT_H
+#define ICU_BOT_H
 
 void bot_connection();
 

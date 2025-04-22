@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <winsock2.h>
-#include "c2-packet.h"
+
+#include "ICU_packet.h"
 
 #pragma comment(lib, "ws2_32.lib")
 

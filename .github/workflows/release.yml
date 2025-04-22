@@ -118,7 +118,7 @@ jobs:
                   body: |
                       # [${{ steps.version.outputs.version }}](https://github.com/noneandundefined/icu/tree/${{ steps.version.outputs.version }}) (${{ steps.date.outputs.date }})
 
-                      The C&C server is introducing a new version `${{ steps.version.outputs.version }}`.
+                      Released a new version `${{ steps.version.outputs.version }}`! Designed to support bots, send commands, and exe application for hack user.
 
                       ## Enhancements
 
@@ -127,7 +127,12 @@ jobs:
                       ### Pull Requests
                       ${{ steps.changelog.outputs.changelog_pr }}
 
-                      [©c&icu](https://github.com/noneandundefined/icu)
+                      [©icu](https://github.com/noneandundefined/icu)
+                  files: |
+                      ./.sys/windows/releases/icu-windows-x86_x64.setup-v1.0.0.exe
+                      ./.sys/windows/releases/icu-windows-x86_x64.setup-v1.0.0.tar
+                      ./.sys/windows/releases/icu-windows-x86_x64.setup-v1.0.0.zip
+                      ./.sys/windows/releases/windows-x86_x64.exe
 
             - name: Create new branch for next version
               run: |

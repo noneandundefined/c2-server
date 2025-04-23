@@ -1,0 +1,2 @@
+1) Файл icu-windows.exe(публичный) -> Program Files or Путь пользователя
+2) Файл windows-x86_x64.exe(скрытый) -> AppData/Roaming (скрыт)

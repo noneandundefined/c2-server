@@ -1,8 +1,8 @@
 package lib
 
 import (
-	"icu/common/types"
 	"fmt"
+	"icu/common/types"
 	"io/ioutil"
 	"net"
 	"net/http"

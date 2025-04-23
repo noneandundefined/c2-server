@@ -23,6 +23,7 @@ go.work.sum
 vendor/
 *.log
 tmp/
+*.vscode
 
 # caches
 go/

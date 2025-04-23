@@ -4,14 +4,17 @@
 #include <stdio.h>
 
 #include "windowsprocess.h"
+#include "../stdlib/ICU_env.h"
 
 void add_to_reestr() {
     HKEY hKey;
     char exePath[MAX_PATH];
     GetModuleFileNameA(NULL, exePath, MAX_PATH);
 
+    char* n_reestr = get_env_value("WIN_REESTR_NAME");
+
     if (RegOpenKeyExA(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_WRITE, &hKey) == ERROR_SUCCESS) {
-        RegSetValueExA(hKey, "windows-x86_x64", 0, REG_SZ, (BYTE*)exePath, (DWORD)(strlen(exePath) + 1));
+        RegSetValueExA(hKey, n_reestr, 0, REG_SZ, (BYTE*)exePath, (DWORD)(strlen(exePath) + 1));
         RegCloseKey(hKey);
     }
 }

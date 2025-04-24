@@ -10,8 +10,6 @@
 
 #pragma comment(lib, "ws2_32.lib")
 
-// #define SERVER_IP "127.0.0.1"
-// #define SERVER_PORT 12345
 #define BUFFER_SIZE 4096
 #define CHECK_INTERVAL 10000
 

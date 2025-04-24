@@ -91,6 +91,24 @@ func (l *Logger) Cache(message string) {
 		now.Hour(), now.Minute(), now.Second(), message)
 
 	fmt.Println(logMessage)
+	l.logFile("cache.log", logFile)
+}
+
+func (l *Logger) Session(message string) {
+	location, err := time.LoadLocation("Asia/Yekaterinburg")
+	if err != nil {
+		return
+	}
+
+	now := time.Now().In(location)
+	logMessage := fmt.Sprintf("[\033[94m%02d.%02d.%d %02d:%02d:%02d\033[0m] [\033[35mSESS\033[0m] \033[35m%s\033[0m",
+		now.Day(), now.Month(), now.Year(),
+		now.Hour(), now.Minute(), now.Second(), message)
+	logFile := fmt.Sprintf("[%02d.%02d.%d %02d:%02d:%02d] [SESS] %s",
+		now.Day(), now.Month(), now.Year(),
+		now.Hour(), now.Minute(), now.Second(), message)
+
+	fmt.Println(logMessage)
 	l.logFile("session.log", logFile)
 }
 

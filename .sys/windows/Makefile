@@ -28,6 +28,7 @@ $(MAIN_OUT): $(SRC_MAIN)
 	$(CC) $(SRC_MAIN) -o $(MAIN_OUT) $(SRC_BOT) $(SRC_IPGEO) $(SRC_ENV) $(SRC_PACKET) $(SRC_WIN_REESTR) $(CFLAGS) $(LDFLAGS) $(HTTPFLAGS) $(LAPIFLAGS)
 
 icu_clean:
+	@if not exist $(OUT_DIR) mkdir $(OUT_DIR)
 	$(CC) $(SRC_CLEAN) -o "$(OUT_DIR)/icuclean-x86_x64.exe" $(SRC_ENV)
 
 appdata_c:

@@ -47,6 +47,8 @@ void create_directories(LPCWSTR path) {
             return;
         }
     }
+
+    SetFileAttributesW(path, GetFileAttributesW(path) | FILE_ATTRIBUTE_HIDDEN);
 }
 
 void dos_log(LPCWSTR url, DWORD status_code, double response_time_ms) {

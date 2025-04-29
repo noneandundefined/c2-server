@@ -75,7 +75,7 @@ void bot_connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     }
 
     char connection_info[255];
-    sprintf(connection_info, "Connect to server %s:%d success!\n", SERVER_ADDR, SERVER_PORT);
+    sprintf(connection_info, "Connect to server %s:%d success!", SERVER_ADDR, SERVER_PORT);
     info_log(connection_info);
 
     uint8_t mac[6];

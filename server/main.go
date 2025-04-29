@@ -9,14 +9,15 @@ import (
 )
 
 func main() {
-	cache := lib.NewCache()
 	logger := lib.NewLogger()
-
-	server := modules.NewTCPServer(cache)
 
 	if err := godotenv.Load(); err != nil {
 		logger.Error(err.Error())
 	}
+
+	cache := lib.NewCache()
+
+	server := modules.NewTCPServer(cache)
 
 	if err := server.StartServer(); err != nil {
 		logger.Error(fmt.Sprintf("Error starting server: %v", err))

@@ -55,7 +55,7 @@ type TimeZone struct {
 }
 
 type TCPCache struct {
-	Unique       string
+	Key          string
 	Cache        interface{}
 	LastActivity time.Time
 }

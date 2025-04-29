@@ -1,6 +1,7 @@
 package types
 
 import (
+	"icu/models"
 	"time"
 )
 
@@ -56,5 +57,10 @@ type TimeZone struct {
 type TCPCache struct {
 	Unique       string
 	Cache        interface{}
+	LastActivity time.Time
+}
+
+type TCPSession struct {
+	Bot          models.IBot
 	LastActivity time.Time
 }

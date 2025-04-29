@@ -56,6 +56,8 @@ func (this *BotClient) IsConnected() bool {
 	return this.isBotConnected
 }
 
+func (this *BotClient) TransitData(commandType uint8, commandData *string) {}
+
 func (this *BotClient) parseData(socketBuf []byte) {
 	if len(socketBuf) == 0 {
 		this.emitter.Emit("error", fmt.Sprintf("Received bytes (%d) is NULL!", len(socketBuf)))

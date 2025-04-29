@@ -7,6 +7,7 @@
 
 #include "conn.h"
 #include "../process/system.h"
+#include "../stdlib/packet.h"
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -66,11 +67,10 @@ int connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
 
     uint8_t mac[6];
     get_mac_address(mac);
-    // const char *ipgeo_json = ipgeo();
 
-    // if (hello_packet(sock, mac, ipgeo_json) < 0) {
-    //     printf("Failed to hello send packet\n");
-    // }
+    if (hello_packet(sock, mac) < 0) {
+        printf("Failed to hello send packet\n");
+    }
 
     while (1) {
         bytes_received = recv(sock, buffer, BUFFER_SIZE - 1, 0);

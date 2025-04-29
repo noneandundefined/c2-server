@@ -61,6 +61,6 @@ type TCPCache struct {
 }
 
 type TCPSession struct {
-	Bot          models.IBot
+	Client       models.IClient
 	LastActivity time.Time
 }

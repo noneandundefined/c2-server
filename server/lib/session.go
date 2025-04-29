@@ -23,26 +23,46 @@ func NewSessionManager() *SessionManager {
 }
 
 // NewBotSession добавляет новую сессию для бота
-func (this *SessionManager) NewBotSession(mac string, bot models.IBot) {
+func (this *SessionManager) NewBotSession(mac string, client models.IClient) {
 	this.mu.Lock()
 	defer this.mu.Unlock()
 
 	if _, exists := this.sessions[mac]; exists {
 		this.logger.Warning(fmt.Sprintf("Session is already exists for (%s)", mac))
-		this.sessions[mac].Bot = bot
+		this.sessions[mac].Client = client
 		this.sessions[mac].LastActivity = time.Now()
 		return
 	}
 
 	this.sessions[mac] = &types.TCPSession{
-		Bot:          bot,
+		Client:       client,
 		LastActivity: time.Now(),
 	}
 
 	this.logger.Session(fmt.Sprintf("Create new bot session for (%s)", mac))
 }
 
-// RemoveBotSession удаляет сессию устройства по IMEI
+// NewBotSession добавляет новую сессию для админа
+func (this *SessionManager) NewAdminSession(mac string, client models.IClient) {
+	this.mu.Lock()
+	defer this.mu.Unlock()
+
+	if _, exists := this.sessions[mac]; exists {
+		this.logger.Warning(fmt.Sprintf("Session is already exists for (%s)", mac))
+		this.sessions[mac].Client = client
+		this.sessions[mac].LastActivity = time.Now()
+		return
+	}
+
+	this.sessions[mac] = &types.TCPSession{
+		Client:       client,
+		LastActivity: time.Now(),
+	}
+
+	this.logger.Session(fmt.Sprintf("Create new admin session for (%s)", mac))
+}
+
+// RemoveBotSession удаляет сессию бота
 func (this *SessionManager) RemoveBotSession(mac string) {
 	this.mu.Lock()
 	defer this.mu.Unlock()
@@ -53,8 +73,27 @@ func (this *SessionManager) RemoveBotSession(mac string) {
 		return
 	}
 
-	if session.Bot != nil {
-		session.Bot.OnBotDisconnect()
+	if session.Client != nil {
+		session.Client.OnBotDisconnect()
+	}
+
+	delete(this.sessions, mac)
+	this.logger.Session(fmt.Sprintf("Delete session for (%s)", mac))
+}
+
+// RemoveAdminSession удаляет сессию админа
+func (this *SessionManager) RemoveAdminSession(mac string) {
+	this.mu.Lock()
+	defer this.mu.Unlock()
+
+	session, exists := this.sessions[mac]
+	if !exists {
+		this.logger.Warning(fmt.Sprintf("Tried to remove non-existent session for (%s)", mac))
+		return
+	}
+
+	if session.Client != nil {
+		session.Client.OnBotDisconnect()
 	}
 
 	delete(this.sessions, mac)
@@ -69,7 +108,7 @@ func (this *SessionManager) TransitData(mac string, commandType uint8, commandDa
 		return
 	}
 
-	session.Bot.TransitData(commandType, commandData)
+	session.Client.TransitData(commandType, commandData)
 }
 
 // MonitorSessions мониторит все сессии и закрывает если нет активности > 6 минут

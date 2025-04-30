@@ -7,7 +7,7 @@
 #include "../stdlib/ICU_packet.h"
 #include "../stdlib/ICU_ipgeo.h"
 #include "../process/windowsprocess.h"
-#include "../ICU_log.h"
+#include "../stdlib/ICU_log.h"
 
 #pragma comment(lib, "ws2_32.lib")
 

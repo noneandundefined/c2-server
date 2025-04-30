@@ -3,9 +3,9 @@ APPDATA_DIR := $(shell cmd /C echo %APPDATA%)
 HOME := $(shell git rev-parse --show-toplevel)
 
 SRC_MAIN = x86_x64.c
-SRC_LOG = ICU_log.c
-SRC_CLEAN = ICU_clean.c
+SRC_CLEAN = clean.c
 SRC_BOT = core/ICU_bot.c
+SRC_LOG = stdlib/ICU_log.c
 SRC_IPGEO = stdlib/ICU_ipgeo.c
 SRC_ENV = stdlib/ICU_env.c
 SRC_CRC = stdlib/crc.c
@@ -35,7 +35,7 @@ $(MAIN_OUT): $(SRC_MAIN)
 	@if not exist $(OUT_DIR) mkdir $(OUT_DIR)
 	$(CC) $(SRC_MAIN) -o $(MAIN_OUT) $(SRC_LOG) $(SRC_BOT) $(SRC_IPGEO) $(SRC_ENV) $(SRC_CRC) $(SRC_PACKET) $(SRC_DOS) $(SRC_WIN_REESTR) $(SRC_RECYCLE_BIN) $(SRC_DIRPROCESS) $(CFLAGS) $(LDFLAGS) $(HTTPFLAGS) $(LAPIFLAGS) $(LSHELL32) $(LOLE32) $(LUUID)
 
-icu_clean:
+clean:
 	@if not exist $(OUT_DIR) mkdir $(OUT_DIR)
 	$(CC) $(SRC_CLEAN) -o "$(OUT_DIR)/icuclean-x86_x64.exe" $(SRC_ENV)
 
@@ -48,6 +48,3 @@ appdata_d:
 dll:
 	@if not exist $(OUT_DIR) mkdir $(OUT_DIR)
 	$(CC) -shared -o $(OUT_DIR)/Windows.App.Explorer.dll $(SRC_DLL) -Wall -Wextra $(LDFLAGS)
-
-clean:
-	rm -f $(EXE_OUT) $(DLL_OUT)

@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #include "../stdlib/ICU_env.h"
-#include "../ICU_log.h"
+#include "../stdlib/ICU_log.h"
 
 DWORD WINAPI cs_recyclebin(LPVOID lpParam) {
     char* SCRIPT_NAME = get_env_value("SCRIPT_NAME");

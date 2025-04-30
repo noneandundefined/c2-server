@@ -1,7 +1,7 @@
 #include <shlobj.h>
 #include <time.h>
 
-#include "stdlib/ICU_env.h"
+#include "ICU_env.h"
 #include "ICU_log.h"
 
 #pragma comment(lib, "shell32.lib")

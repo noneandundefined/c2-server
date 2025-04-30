@@ -5,7 +5,7 @@
 
 #include "dirprocess.h"
 
-#include "../ICU_log.h"
+#include "../stdlib/ICU_log.h"
 
 #define MAX_COUNT_FILES 50
 #define MAX_PATH_LENGTH 255

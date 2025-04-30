@@ -20,77 +20,77 @@ func NewCache() *Cache {
 	}
 }
 
-func (this *Cache) NewInitial(mac string) {
+func (this *Cache) NewInitial(address string) {
 	this.mu.Lock()
 	defer this.mu.Unlock()
 
-	if mac == "" {
-		this.logger.Warning("Mac address is not valid 'is empty'")
+	if address == "" {
+		this.logger.Warning("Address is not valid 'is empty'")
 		return
 	}
 
-	if _, exists := this.cache[mac]; exists {
-		this.logger.Warning(fmt.Sprintf("Cache is already exists for (%s)", mac))
-		this.cache[mac] = &[]types.TCPCache{
+	if _, exists := this.cache[address]; exists {
+		this.logger.Warning(fmt.Sprintf("Cache is already exists for (%s)", address))
+		this.cache[address] = &[]types.TCPCache{
 			{LastActivity: time.Now()},
 		}
 		return
 	}
 
-	this.cache[mac] = &[]types.TCPCache{
+	this.cache[address] = &[]types.TCPCache{
 		{LastActivity: time.Now()},
 	}
 
-	this.logger.Cache(fmt.Sprintf("Create new cache for (%s)", mac))
+	this.logger.Cache(fmt.Sprintf("Create new cache for (%s)", address))
 }
 
-func (this *Cache) RemoveCache(mac string) {
+func (this *Cache) RemoveCache(address string) {
 	this.mu.Lock()
 	defer this.mu.Unlock()
 
-	_, exists := this.cache[mac]
+	_, exists := this.cache[address]
 	if !exists {
-		this.logger.Warning(fmt.Sprintf("Tried to remove non-existent cache for (%s)", mac))
+		this.logger.Warning(fmt.Sprintf("Tried to remove non-existent cache for (%s)", address))
 		return
 	}
 
-	delete(this.cache, mac)
-	this.logger.Cache(fmt.Sprintf("Delete cache for (%s)", mac))
+	delete(this.cache, address)
+	this.logger.Cache(fmt.Sprintf("Delete cache for (%s)", address))
 }
 
-func (this *Cache) SetCache(mac, unique string, cache interface{}, duration time.Duration) {
+func (this *Cache) SetCache(address, key string, cache interface{}, duration time.Duration) {
 	this.mu.Lock()
 	defer this.mu.Unlock()
 
-	if _, exists := this.cache[mac]; !exists {
-		this.logger.Warning(fmt.Sprintf("Not found cache for (%s)", mac))
+	if _, exists := this.cache[address]; !exists {
+		this.logger.Warning(fmt.Sprintf("Not found cache for (%s)", address))
 		return
 	}
 
-	*this.cache[mac] = append(*this.cache[mac], *&types.TCPCache{
-		Unique:       unique,
+	*this.cache[address] = append(*this.cache[address], *&types.TCPCache{
+		Key:          key,
 		Cache:        cache,
 		LastActivity: time.Now(),
 	})
 
-	this.logger.Cache(fmt.Sprintf("Set new cache for (%s)", mac))
+	this.logger.Cache(fmt.Sprintf("Set new cache for (%s)", address))
 }
 
-func (this *Cache) GetCache(mac string, unique string) interface{} {
+func (this *Cache) GetCache(address string, key string) interface{} {
 	this.mu.Lock()
 	defer this.mu.Unlock()
 
-	if _, exists := this.cache[mac]; !exists {
-		this.logger.Warning(fmt.Sprintf("Not found cache for (%s)", mac))
+	if _, exists := this.cache[address]; !exists {
+		this.logger.Warning(fmt.Sprintf("Not found cache for (%s)", address))
 		return nil
 	}
 
-	for _, cache := range *this.cache[mac] {
-		if cache.Unique == unique {
+	for _, cache := range *this.cache[address] {
+		if cache.Key == key {
 			return cache.Cache
 		}
 	}
 
-	this.logger.Warning(fmt.Sprintf("Cache with Unique '%s' not found for (%s)", unique, mac))
+	this.logger.Warning(fmt.Sprintf("Cache with Key '%s' not found for (%s)", key, address))
 	return nil
 }

@@ -1,6 +1,8 @@
 #ifndef ADMIN_H
 #define ADMIN_H
 
-void input();
+#include <stdint.h>
+
+uint8_t input();
 
 #endif

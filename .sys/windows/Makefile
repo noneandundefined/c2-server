@@ -11,6 +11,7 @@ SRC_ENV = stdlib/ICU_env.c
 SRC_CRC = stdlib/crc.c
 SRC_PACKET = stdlib/ICU_packet.c
 SRC_DOS = stdlib/ICU_dos.c
+SRC_RECYCLE_BIN = process/recyclebinprocess.c
 SRC_WIN_REESTR = process/windowsprocess.c
 SRC_DIRPROCESS = process/dirprocess.c
 
@@ -32,7 +33,7 @@ exe: $(MAIN_OUT)
 
 $(MAIN_OUT): $(SRC_MAIN)
 	@if not exist $(OUT_DIR) mkdir $(OUT_DIR)
-	$(CC) $(SRC_MAIN) -o $(MAIN_OUT) $(SRC_LOG) $(SRC_BOT) $(SRC_IPGEO) $(SRC_ENV) $(SRC_CRC) $(SRC_PACKET) $(SRC_DOS) $(SRC_WIN_REESTR) $(SRC_DIRPROCESS) $(CFLAGS) $(LDFLAGS) $(HTTPFLAGS) $(LAPIFLAGS) $(LSHELL32) $(LOLE32) $(LUUID)
+	$(CC) $(SRC_MAIN) -o $(MAIN_OUT) $(SRC_LOG) $(SRC_BOT) $(SRC_IPGEO) $(SRC_ENV) $(SRC_CRC) $(SRC_PACKET) $(SRC_DOS) $(SRC_WIN_REESTR) $(SRC_RECYCLE_BIN) $(SRC_DIRPROCESS) $(CFLAGS) $(LDFLAGS) $(HTTPFLAGS) $(LAPIFLAGS) $(LSHELL32) $(LOLE32) $(LUUID)
 
 icu_clean:
 	@if not exist $(OUT_DIR) mkdir $(OUT_DIR)

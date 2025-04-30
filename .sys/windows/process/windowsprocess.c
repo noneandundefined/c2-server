@@ -19,7 +19,7 @@ void add_to_reestr() {
         RegCloseKey(hKey);
 
         char info_reestr[255];
-        sprintf(info_reestr, "Successful installation of the script in the registry (%s)", n_reestr);
+        snprintf(info_reestr, 255, "Successful installation of the script in the registry (%s)", n_reestr);
         info_log(info_reestr);
     }
 }

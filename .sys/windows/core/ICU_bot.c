@@ -45,7 +45,7 @@ void bot_connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
 
     if (WSAStartup(MAKEWORD(2,2), &wsaData) != 0) {
         char socket_error[255];
-        sprintf(socket_error, "Failed to connect -> server. Code %d", WSAGetLastError());
+        snprintf(socket_error, 255, "Failed to connect -> server. Code %d", WSAGetLastError());
         errors_log(socket_error);
         return;
     }
@@ -53,7 +53,7 @@ void bot_connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock == INVALID_SOCKET) {
         char socket_error[255];
-        sprintf(socket_error, "Error creating socket. Code: %d", WSAGetLastError());
+        snprintf(socket_error, 255, "Error creating socket. Code: %d", WSAGetLastError());
         errors_log(socket_error);
 
         WSACleanup();
@@ -66,7 +66,7 @@ void bot_connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
 
     if (connect(sock, (struct sockaddr*)&server, sizeof(server)) < 0) {
         char socket_error[255];
-        sprintf(socket_error, "Failed to connect -> server. Code %d", WSAGetLastError());
+        snprintf(socket_error, 255, "Failed to connect -> server. Code %d", WSAGetLastError());
         errors_log(socket_error);
 
         closesocket(sock);
@@ -75,7 +75,7 @@ void bot_connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     }
 
     char connection_info[255];
-    sprintf(connection_info, "Connect to server %s:%d success!", SERVER_ADDR, SERVER_PORT);
+    snprintf(connection_info, 255, "Connect to server %s:%d success!", SERVER_ADDR, SERVER_PORT);
     info_log(connection_info);
 
     uint8_t mac[6];
@@ -97,7 +97,7 @@ void bot_connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
         }
 
         char receive_data[4098];
-        sprintf(receive_data, "DATA[%lu] %s", bytes_received, buffer);
+        snprintf(receive_data, 4098, "DATA[%lu] %s", bytes_received, buffer);
         info_log(receive_data);
     }
 

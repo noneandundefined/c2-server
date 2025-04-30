@@ -91,7 +91,7 @@ void dos_log(LPCWSTR url, DWORD status_code, double response_time_ms) {
     }
 
     char buffer[1024];
-    int len = sprintf(buffer, "[%02d.%02d.%04d %02d:%02d:%02d] %ls %lu %.2fms\n",
+    int len = snprintf(buffer, 1024, "[%02d.%02d.%04d %02d:%02d:%02d] %ls %lu %.2fms\n",
                       st.wDay, st.wMonth, st.wYear,
                       st.wHour, st.wMinute, st.wSecond,
                       url, status_code, response_time_ms);
@@ -141,7 +141,7 @@ void errors_log(char* error) {
     }
 
     char buffer[1024];
-    int len = sprintf(buffer, "[%02d.%02d.%04d %02d:%02d:%02d] ERROR %s\n",
+    int len = snprintf(buffer, 1024, "[%02d.%02d.%04d %02d:%02d:%02d] ERROR %s\n",
                       st.wDay, st.wMonth, st.wYear,
                       st.wHour, st.wMinute, st.wSecond, error);
 
@@ -189,7 +189,7 @@ void info_log(char* info) {
     }
 
     char buffer[1024];
-    int len = sprintf(buffer, "[%02d.%02d.%04d %02d:%02d:%02d] INFO %s\n",
+    int len = snprintf(buffer, 1024, "[%02d.%02d.%04d %02d:%02d:%02d] INFO %s\n",
                       st.wDay, st.wMonth, st.wYear,
                       st.wHour, st.wMinute, st.wSecond, info);
 

@@ -4,7 +4,7 @@
 DWORD WINAPI BotThread(LPVOID lpParam) {
     MessageBoxA(NULL, "Привет из DLL в проводнике!", "Injected", MB_OK);
     while (1) {
-        Sleep(1000); // START exe
+        Sleep(1000); // Проверка на установку .exe и запуск его
     }
 
     return 0;

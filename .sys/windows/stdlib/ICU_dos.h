@@ -1,9 +1,9 @@
+#ifndef ICU_DOS_H
+#define ICU_DOS_H
+
 #include <windows.h>
 #include <winhttp.h>
 #include <stdio.h>
-
-#ifndef ICU_DOS_H
-#define ICU_DOS_H
 
 typedef struct {
     LPCWSTR url;

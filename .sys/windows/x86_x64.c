@@ -1,7 +1,7 @@
 #include <windows.h>
 
 #include "core/ICU_bot.h"
-#include "ICU_log.h"
+#include "stdlib/ICU_log.h"
 #include "stdlib/ICU_env.h"
 
 #include "process/dirprocess.h"

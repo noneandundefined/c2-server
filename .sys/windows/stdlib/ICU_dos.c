@@ -1,5 +1,5 @@
 #include "ICU_dos.h"
-#include "../ICU_log.h"
+#include "ICU_log.h"
 
 #pragma comment(lib, "winhttp.lib")
 

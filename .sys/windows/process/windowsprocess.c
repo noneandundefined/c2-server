@@ -5,7 +5,7 @@
 
 #include "windowsprocess.h"
 #include "../stdlib/ICU_env.h"
-#include "../ICU_log.h"
+#include "../stdlib/ICU_log.h"
 
 void add_to_reestr() {
     HKEY hKey;

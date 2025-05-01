@@ -62,6 +62,7 @@ function showReleaseDetails(release) {
 	description__release.innerHTML = html;
 
 	document.getElementById('windows__assets').innerHTML = `
+		<p>Windows</p>
         ${
 			release.assets
 				.map(

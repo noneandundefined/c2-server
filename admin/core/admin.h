@@ -5,4 +5,6 @@
 
 uint8_t input();
 
+void ddos_input(SOCKET sock);
+
 #endif

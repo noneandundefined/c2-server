@@ -13,6 +13,7 @@
 			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
 			rel="stylesheet"
 		/>
+        <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
 		<link rel="stylesheet" href="./style/version.css" />
 		<link rel="stylesheet" href="./index.css" />
 		<script src="./github/releases.js" defer></script>
@@ -54,42 +55,23 @@
 					<small style="color: gray" id="date__release"></small>
 				</div>
 				<div class="downloads">
-					<p><strong>macOS</strong></p>
-					<a href="#">Zed-aarch64.dmg (Apple silicon)</a>
-					<a href="#">Zed-x86_64.dmg (Intel chip)</a>
+					<div>
+						<p>Windows</p>
+						<a href="#">Zed-aarch64.dmg (Apple silicon)</a>
+						<a href="#">Zed-x86_64.dmg (Intel chip)</a>
+					</div>
 
-					<p><strong>Linux</strong></p>
-					<a href="#">zed-linux-aarch64.tar.gz</a>
-					<a href="#">zed-linux-x86_64.tar.gz</a>
+					<div>
+						<p>Linux</p>
+						<a href="#">zed-linux-aarch64.tar.gz</a>
+						<a href="#">zed-linux-x86_64.tar.gz</a>
+					</div>
 				</div>
 
 				<div class="section">
-					<h3>Описание</h3>
-					<p>
-						Today's release features drag-and-drop file uploads to
-						remote projects, remote branch support in the branch
-						picker, multiple Python virtual environments in a single
-						worktree, and customizable Vim cursor shapes for
-						different modes.
+					<p id="description__release">
+						<!-- динамически -->
 					</p>
-				</div>
-
-				<div class="section">
-					<h3>Enhancements</h3>
-					<ul>
-						<li>
-							Добавлена возможность копировать файлы в проект
-							(#28987)
-						</li>
-						<li>
-							Навигация между изменениями:
-							<code>editor::GoToPreviousChange</code> и
-							<code>editor::GoToNextChange</code> (#28891)
-						</li>
-						<li>Улучшен выбор слов в терминале (#29131)</li>
-						<li>Поддержка regex highlighting (#28183)</li>
-						<li>Улучшен fuzzy поиск и LSP (#29442)</li>
-					</ul>
 				</div>
 			</main>
 

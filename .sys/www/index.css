@@ -5,6 +5,10 @@ body {
 	padding: 0;
 }
 
+html, * {
+	font-family: 'JetBrains Mono', monospace;
+}
+
 h1,
 h2,
 h3,

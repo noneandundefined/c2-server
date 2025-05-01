@@ -26,7 +26,7 @@ header li:hover {
 }
 
 header .active {
-	color: #f00;
+	color: #0047b3;
 	transition: 0.1s;
 }
 
@@ -47,7 +47,7 @@ header .active {
 }
 
 #welcome .welcome__span__ICU {
-	color: #f00;
+	color: #0047b3;
 }
 
 #welcome .welcome__div__buttons {
@@ -58,24 +58,21 @@ header .active {
 }
 
 #welcome .welcome__div__buttons .welcome__button__intall {
-	background-color: #eee;
-	color: #000;
-	border-radius: 6px;
-	padding: 7px 35px;
-	font-weight: 600;
-	box-shadow: 0 0 70px 0 rgba(255, 255, 255, 0.5);
-	transition: 0.1s;
+	background: #e6f0ff;
+	color: #0047b3;
+	border-radius: 5px;
+	border: 1px solid #b9d1f6;
+	padding: 0.5rem 1rem;
+	font-weight: 500;
+	font-size: 14px;
 }
 #welcome .welcome__div__buttons .welcome__button__intall:hover {
-	background-color: #d2d2d2;
-	color: #000;
-	box-shadow: 0 0 50px 0 rgba(255, 255, 255, 0.5);
-	transition: 0.2s;
+	background: #dbe8fb;
 }
 
 #welcome .welcome__div__buttons .welcome__link__source {
 	color: #777;
-	font-weight: 500;
+	font-size: 14px;
 	transition: 0.05s;
 }
 #welcome .welcome__div__buttons .welcome__link__source:hover {

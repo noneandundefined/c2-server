@@ -35,6 +35,9 @@ async function fetchReleases() {
 function showReleaseDetails(release) {
 	const name__tag = document.getElementById('name__tag');
 	const date__release = document.getElementById('date__release');
+	const description__release = document.getElementById(
+		'description__release'
+	);
 
 	name__tag.innerText = release.name || release.tag_name;
 
@@ -46,6 +49,13 @@ function showReleaseDetails(release) {
 	const year = date.getUTCFullYear();
 
 	date__release.innerText = `${month}/${day}/${year}`;
+	const markdownText = release.body
+		? release.body.replace(/\n/g, '<br>')
+		: 'Нет описания';
+
+	const converter = new showdown.Converter();
+	const html = converter.makeHtml(markdownText);
+	description__release.innerHTML = html;
 
 	const detailsEl = document.getElementById('release__details');
 	detailsEl.innerHTML = `

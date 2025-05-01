@@ -17,13 +17,16 @@ h6 {
 
 header {
 	display: flex;
+	justify-content: center;
 	position: fixed;
 	background: rgba(255, 255, 255, 0.1);
+	font-family: "Roboto Mono", monospace;
 	width: 100%;
 }
 
 header ul {
 	display: flex;
+	cursor: pointer;
 	gap: 2rem;
 }
 

@@ -1,11 +1,12 @@
 body {
-	background: #fff;
+	background: color-mix(in oklab, var(#e8e6d9) 20%, transparent);
 	color: #000;
 
 	padding: 0;
 }
 
-html, * {
+html,
+* {
 	font-family: 'JetBrains Mono', monospace;
 }
 

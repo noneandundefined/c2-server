@@ -29,43 +29,6 @@ header .active {
 	transition: 0.1s;
 }
 
-#versions {
-	margin: 0 20rem;
-	margin-top: 5rem;
-	border-left: 1px solid #fff;
-
-	display: flex;
-}
-
-#versions .v {
-	padding-left: 20px;
-	font-size: 13px;
-	color: #999;
-	text-transform: uppercase;
-	margin-bottom: 10px;
-}
-#versions .releases__list {
-	min-width: 8rem;
-}
-#versions #releases-list {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-}
-#versions #releases-list li {
-	cursor: pointer;
-	padding-left: 20px;
-}
-#versions #releases-list li:hover {
-	background: #ffffff1a;
-}
-#versions #release__details {
-	margin-left: 10rem;
-	background: rgba(255, 255, 255, 0.1);
-	padding: 10px;
-	border-radius: 6px;
-}
-
 body {
 	margin: 0;
 	font-family: system-ui, sans-serif;

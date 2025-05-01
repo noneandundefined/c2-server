@@ -155,6 +155,8 @@ header .active {
 	margin: 0 20rem;
 	margin-top: 5rem;
 	border-left: 1px solid #fff;
+
+	display: flex;
 }
 
 #versions .v {
@@ -165,7 +167,7 @@ header .active {
 	margin-bottom: 10px;
 }
 #versions .releases__list {
-
+	min-width: 8rem;
 }
 #versions #releases-list {
 	display: flex;
@@ -179,5 +181,9 @@ header .active {
 #versions #releases-list li:hover {
 	background: #ffffff1a;
 }
-#versions .release__details {
+#versions #release__details {
+	margin-left: 10rem;
+	background: rgba(255, 255, 255, 0.1);
+	padding: 10px;
+	border-radius: 6px;
 }

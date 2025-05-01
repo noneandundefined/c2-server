@@ -57,29 +57,18 @@ function showReleaseDetails(release) {
 	const html = converter.makeHtml(markdownText);
 	description__release.innerHTML = html;
 
-	const detailsEl = document.getElementById('release__details');
-	detailsEl.innerHTML = `
-      <h2>${release.name || release.tag_name}</h2>
-      <p><strong>Tag:</strong> ${release.tag_name}</p>
-      <p><strong>Описание:</strong><br>${
-			release.body ? release.body.replace(/\n/g, '<br>') : 'Нет описания'
-		}</p>
-      <h3>Файлы:</h3>
-      <ul>
+	document.getElementById('windows__assets').innerHTML = `
         ${
 			release.assets
 				.map(
 					(asset) => `
-          <li>
             <a href="${asset.browser_download_url}" target="_blank">
               ${asset.name} (${(asset.size / 1024).toFixed(1)} KB)
             </a>
-          </li>
         `
 				)
 				.join('') || '<li>Нет прикреплённых файлов</li>'
 		}
-      </ul>
     `;
 }
 

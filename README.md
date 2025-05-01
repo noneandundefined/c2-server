@@ -11,9 +11,9 @@ Welcome to ICU, designed to support bots, send commands, and run an application 
 ## Documentation
 
 -   [Documentation](https://github.com/noneandundefined/icu/blob/docs/docs/Documentation.EN.md)
--   [Developer](https://github.com/noneandundefined/icu/blob/docs/docs/Developer.EN.md)
--   [Install](https://github.com/noneandundefined/icu/blob/docs/docs/Install.EN.md)
--   [System](https://github.com/noneandundefined/icu/blob/docs/docs/System.EN.md)
+-   [For Developer](https://github.com/noneandundefined/icu/blob/docs/docs/Developer.EN.md)
+-   [Install ICU and Admin](https://github.com/noneandundefined/icu/blob/docs/docs/Install.EN.md)
+-   [ICU for anothers systems](https://github.com/noneandundefined/icu/blob/docs/docs/System.EN.md)
 
 ## Versions
 

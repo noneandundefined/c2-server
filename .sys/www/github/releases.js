@@ -33,6 +33,20 @@ async function fetchReleases() {
 }
 
 function showReleaseDetails(release) {
+	const name__tag = document.getElementById('name__tag');
+	const date__release = document.getElementById('date__release');
+
+	name__tag.innerText = release.name || release.tag_name;
+
+	const isoDate = release.published_at;
+	const date = new Date(isoDate);
+
+	const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // месяцы с 0
+	const day = String(date.getUTCDate()).padStart(2, '0');
+	const year = date.getUTCFullYear();
+
+	date__release.innerText = `${month}/${day}/${year}`;
+
 	const detailsEl = document.getElementById('release__details');
 	detailsEl.innerHTML = `
       <h2>${release.name || release.tag_name}</h2>

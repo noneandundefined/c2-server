@@ -11,7 +11,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: 'Cal Sans', sans-serif;
+	font-family: 'JetBrains Mono', monospace;
 	letter-spacing: 0.3px;
 }
 
@@ -22,5 +22,5 @@ button,
 input,
 textarea,
 a {
-	font-family: 'Outfit', sans-serif;
+	font-family: 'JetBrains Mono', monospace;
 }

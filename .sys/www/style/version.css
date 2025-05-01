@@ -1,9 +1,8 @@
 header {
 	display: flex;
 	justify-content: center;
-	/* position: fixed; */
 	background: rgba(255, 255, 255, 0.1);
-	font-family: 'Outfit', sans-serif;
+	font-family: 'JetBrains Mono', monospace;
 	font-size: 15px;
 	padding: 5px 0;
 	width: 100%;
@@ -164,4 +163,10 @@ main h2 {
 
 .right a:hover {
 	text-decoration: underline;
+}
+
+.header__release {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }

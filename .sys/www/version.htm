@@ -19,6 +19,7 @@
 			href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
 			rel="stylesheet"
 		/>
+		<link rel="stylesheet" href="./style/version.css" />
 		<link rel="stylesheet" href="./index.css" />
 		<script src="./github/releases.js" defer></script>
 		<title>Versions - I Control You</title>
@@ -37,12 +38,73 @@
 			</ul>
 		</header>
 
-		<section id="versions">
+		<!-- <section id="versions">
 			<div class="releases__list">
 				<p class="v">versions</p>
 				<ul id="releases-list"></ul>
 			</div>
 			<div id="release__details"></div>
-		</section>
+		</section> -->
+
+		<div class="container">
+			<aside>
+				<h3>Versions</h3>
+				<ul id="releases-list">
+					<!-- динамически -->
+				</ul>
+			</aside>
+
+			<main>
+				<h2>0.184.8 <small style="color: gray">(04/30/2025)</small></h2>
+				<div class="downloads">
+					<p><strong>macOS</strong></p>
+					<a href="#">Zed-aarch64.dmg (Apple silicon)</a>
+					<a href="#">Zed-x86_64.dmg (Intel chip)</a>
+
+					<p><strong>Linux</strong></p>
+					<a href="#">zed-linux-aarch64.tar.gz</a>
+					<a href="#">zed-linux-x86_64.tar.gz</a>
+				</div>
+
+				<div class="section">
+					<h3>Описание</h3>
+					<p>
+						Today's release features drag-and-drop file uploads to
+						remote projects, remote branch support in the branch
+						picker, multiple Python virtual environments in a single
+						worktree, and customizable Vim cursor shapes for
+						different modes.
+					</p>
+				</div>
+
+				<div class="section">
+					<h3>Enhancements</h3>
+					<ul>
+						<li>
+							Добавлена возможность копировать файлы в проект
+							(#28987)
+						</li>
+						<li>
+							Навигация между изменениями:
+							<code>editor::GoToPreviousChange</code> и
+							<code>editor::GoToNextChange</code> (#28891)
+						</li>
+						<li>Улучшен выбор слов в терминале (#29131)</li>
+						<li>Поддержка regex highlighting (#28183)</li>
+						<li>Улучшен fuzzy поиск и LSP (#29442)</li>
+					</ul>
+				</div>
+			</main>
+
+			<div class="right">
+				<p><strong>Дополнительно</strong></p>
+				<ul>
+					<li><a href="#">Zed for Linux</a></li>
+					<li><a href="#">Zed AI Beta</a></li>
+					<li><a href="#">Remote Development</a></li>
+					<li><a href="#">Edit Prediction</a></li>
+				</ul>
+			</div>
+		</div>
 	</body>
 </html>

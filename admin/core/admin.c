@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <winsock2.h>
 
 #include "admin.h"
 
@@ -26,4 +27,10 @@ uint8_t input() {
     }
 
     return action;
+}
+
+void ddos_input(SOCKET sock) {
+    char urls[4098];
+
+    printf("[!]")
 }

@@ -77,37 +77,36 @@ h6 {
 #welcome .welcome__circle__div__animation .welcome__circle__one {
 	position: absolute;
 	transform: translate(-50%, -50%);
-	width: 40rem;
-	height: 40rem;
+	width: 50rem;
+	height: 50rem;
 	opacity: 0.4;
-	box-shadow: 0 0 21px 0 rgba(255, 255, 255, 0.5);
+	box-shadow: 0 0 50px 0 rgba(189, 189, 189, 0.45);
 	border-radius: 50%;
 }
 #welcome .welcome__circle__div__animation .welcome__circle__two {
 	position: absolute;
 	transform: translate(-50%, -50%);
-	width: 30rem;
-	height: 30rem;
+	width: 40rem;
+	height: 40rem;
 	opacity: 0.4;
-	/* border: 1px solid #fff; */
-	box-shadow: 0 0 21px 0 rgba(255, 255, 255, 0.45);
+	box-shadow: 0 0 50px 0 rgba(189, 189, 189, 0.4);
 	border-radius: 50%;
 }
 #welcome .welcome__circle__div__animation .welcome__circle__three {
 	position: absolute;
 	transform: translate(-50%, -50%);
-	width: 20rem;
-	height: 20rem;
+	width: 30rem;
+	height: 30rem;
 	opacity: 0.4;
-	box-shadow: 0 0 21px 0 rgba(255, 255, 255, 0.4);
+	box-shadow: 0 0 50px 0 rgba(189, 189, 189, 0.35);
 	border-radius: 50%;
 }
 #welcome .welcome__circle__div__animation .welcome__circle__four {
 	position: absolute;
 	transform: translate(-50%, -50%);
-	width: 10rem;
-	height: 10rem;
+	width: 20rem;
+	height: 20rem;
 	opacity: 0.4;
-	box-shadow: 0 0 21px 0 rgba(255, 255, 255, 0.35);
+	box-shadow: 0 0 50px 0 rgba(189, 189, 189, 0.3);
 	border-radius: 50%;
 }

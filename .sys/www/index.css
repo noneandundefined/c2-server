@@ -1,0 +1,31 @@
+body {
+	background: color-mix(in oklab, var(#e8e6d9) 20%, transparent);
+	color: #000;
+
+	padding: 0;
+}
+
+html,
+* {
+	font-family: 'JetBrains Mono', monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'JetBrains Mono', monospace;
+	letter-spacing: 0.3px;
+}
+
+p,
+ul,
+li,
+button,
+input,
+textarea,
+a {
+	font-family: 'JetBrains Mono', monospace;
+}

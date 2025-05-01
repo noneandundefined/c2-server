@@ -16,4 +16,17 @@ typedef struct {
 
 int hello_packet(SOCKET sock, const uint8_t* mac);
 
+#pragma pack(push, 1)
+typedef struct {
+    uint16_t size;
+    uint8_t version;
+    uint8_t type;
+    uint8_t c_type;
+    uint8_t crc;
+    char command[];
+} CommandPacket;
+#pragma pack(pop)
+
+int command_packet(SOCKET sock, uint8_t c_type, const char *command);
+
 #endif

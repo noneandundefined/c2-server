@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./style/index.css" />
+		<link rel="stylesheet" href="./index.css" />
+		<title>I Control You</title>
+	</head>
+	<body>
+		<header>
+			<ul>
+				<li class="active"><a href="index.htm">Installer</a></li>
+				<li><a href="version.htm">Version</a></li>
+				<li>
+					<a href="https://github.com/noneandundefined/icu"
+						>Source Code</a
+					>
+				</li>
+			</ul>
+		</header>
+
+		<section id="welcome">
+			<div class="welcome__circle__div__animation">
+				<div class="welcome__circle__one"></div>
+				<div class="welcome__circle__two"></div>
+				<div class="welcome__circle__three"></div>
+				<div class="welcome__circle__four"></div>
+			</div>
+
+			<h1 class="welcome__h1">
+				Welcome to the
+				<span class="welcome__span__ICU">ICU</span> installation page!
+			</h1>
+
+			<div class="welcome__div__buttons">
+				<!-- <button class="welcome__button__intall">Installer</button> -->
+				<a
+					href="https://github.com/noneandundefined/icu/blob/main/.sys/windows/releases/icu-windows-x86_x64.setup-v1.0.0.exe?raw=true"
+					class="welcome__button__intall"
+					download
+					>Installer</a
+				>
+				<a href="version.htm" class="welcome__link__source">Versions</a>
+			</div>
+		</section>
+	</body>
+</html>

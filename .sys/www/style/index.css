@@ -1,0 +1,124 @@
+header {
+	display: flex;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.1);
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 14px;
+	padding: 14px 0;
+	width: 100%;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+header ul {
+	display: flex;
+	cursor: pointer;
+	gap: 6rem;
+}
+
+header li {
+	color: #999;
+	transition: 0.1s;
+}
+header li:hover {
+	color: #000;
+	transition: 0.2s;
+}
+
+header .active {
+	color: #0047b3;
+	transition: 0.1s;
+}
+
+#welcome {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#welcome .welcome__h1 {
+	font-size: 4rem;
+	text-align: center;
+	max-width: 45vw;
+	font-weight: 700;
+	color: #000;
+}
+
+#welcome .welcome__span__ICU {
+	color: #0047b3;
+}
+
+#welcome .welcome__div__buttons {
+	display: flex;
+	align-items: center;
+	gap: 1.6rem;
+	margin-top: 1.1rem;
+}
+
+#welcome .welcome__div__buttons .welcome__button__intall {
+	background: #e6f0ff;
+	color: #0047b3;
+	border-radius: 5px;
+	border: 1px solid #b9d1f6;
+	padding: 0.5rem 1rem;
+	font-weight: 500;
+	font-size: 14px;
+}
+#welcome .welcome__div__buttons .welcome__button__intall:hover {
+	background: #dbe8fb;
+}
+
+#welcome .welcome__div__buttons .welcome__link__source {
+	color: #777;
+	font-size: 14px;
+	transition: 0.05s;
+}
+#welcome .welcome__div__buttons .welcome__link__source:hover {
+	color: #000;
+	transition: 0.2s;
+}
+
+#welcome .welcome__circle__div__animation {
+	position: absolute;
+	z-index: -99;
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 50%;
+}
+#welcome .welcome__circle__div__animation .welcome__circle__one {
+	position: absolute;
+	transform: translate(-50%, -50%);
+	width: 50rem;
+	height: 50rem;
+	opacity: 0.4;
+	box-shadow: 0 0 50px 0 rgba(189, 189, 189, 0.45);
+	border-radius: 50%;
+}
+#welcome .welcome__circle__div__animation .welcome__circle__two {
+	position: absolute;
+	transform: translate(-50%, -50%);
+	width: 40rem;
+	height: 40rem;
+	opacity: 0.4;
+	box-shadow: 0 0 50px 0 rgba(189, 189, 189, 0.4);
+	border-radius: 50%;
+}
+#welcome .welcome__circle__div__animation .welcome__circle__three {
+	position: absolute;
+	transform: translate(-50%, -50%);
+	width: 30rem;
+	height: 30rem;
+	opacity: 0.4;
+	box-shadow: 0 0 50px 0 rgba(189, 189, 189, 0.35);
+	border-radius: 50%;
+}
+#welcome .welcome__circle__div__animation .welcome__circle__four {
+	position: absolute;
+	transform: translate(-50%, -50%);
+	width: 20rem;
+	height: 20rem;
+	opacity: 0.4;
+	box-shadow: 0 0 50px 0 rgba(189, 189, 189, 0.3);
+	border-radius: 50%;
+}

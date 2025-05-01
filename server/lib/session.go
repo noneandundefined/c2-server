@@ -23,53 +23,53 @@ func NewSessionManager() *SessionManager {
 }
 
 // NewBotSession добавляет новую сессию для бота
-func (this *SessionManager) NewBotSession(mac string, client models.IClient) {
+func (this *SessionManager) NewBotSession(address string, client models.IClient) {
 	this.mu.Lock()
 	defer this.mu.Unlock()
 
-	if _, exists := this.sessions[mac]; exists {
-		this.logger.Warning(fmt.Sprintf("Session is already exists for (%s)", mac))
-		this.sessions[mac].Client = client
-		this.sessions[mac].LastActivity = time.Now()
+	if _, exists := this.sessions[address]; exists {
+		this.logger.Warning(fmt.Sprintf("Session bot is already exists for (%s)", address))
+		this.sessions[address].Client = client
+		this.sessions[address].LastActivity = time.Now()
 		return
 	}
 
-	this.sessions[mac] = &types.TCPSession{
+	this.sessions[address] = &types.TCPSession{
 		Client:       client,
 		LastActivity: time.Now(),
 	}
 
-	this.logger.Session(fmt.Sprintf("Create new bot session for (%s)", mac))
+	this.logger.Session(fmt.Sprintf("Create new bot session for (%s)", address))
 }
 
-// NewBotSession добавляет новую сессию для админа
-func (this *SessionManager) NewAdminSession(mac string, client models.IClient) {
+// NewAdminSession добавляет новую сессию для админа
+func (this *SessionManager) NewAdminSession(address string, client models.IClient) {
 	this.mu.Lock()
 	defer this.mu.Unlock()
 
-	if _, exists := this.sessions[mac]; exists {
-		this.logger.Warning(fmt.Sprintf("Session is already exists for (%s)", mac))
-		this.sessions[mac].Client = client
-		this.sessions[mac].LastActivity = time.Now()
+	if _, exists := this.sessions[address]; exists {
+		this.logger.Warning(fmt.Sprintf("Session admin is already exists for (%s)", address))
+		this.sessions[address].Client = client
+		this.sessions[address].LastActivity = time.Now()
 		return
 	}
 
-	this.sessions[mac] = &types.TCPSession{
+	this.sessions[address] = &types.TCPSession{
 		Client:       client,
 		LastActivity: time.Now(),
 	}
 
-	this.logger.Session(fmt.Sprintf("Create new admin session for (%s)", mac))
+	this.logger.Session(fmt.Sprintf("Create new admin session for (%s)", address))
 }
 
 // RemoveBotSession удаляет сессию бота
-func (this *SessionManager) RemoveBotSession(mac string) {
+func (this *SessionManager) RemoveBotSession(address string) {
 	this.mu.Lock()
 	defer this.mu.Unlock()
 
-	session, exists := this.sessions[mac]
+	session, exists := this.sessions[address]
 	if !exists {
-		this.logger.Warning(fmt.Sprintf("Tried to remove non-existent session for (%s)", mac))
+		this.logger.Warning(fmt.Sprintf("Tried to remove non-existent session for (%s)", address))
 		return
 	}
 
@@ -77,18 +77,18 @@ func (this *SessionManager) RemoveBotSession(mac string) {
 		session.Client.OnBotDisconnect()
 	}
 
-	delete(this.sessions, mac)
-	this.logger.Session(fmt.Sprintf("Delete session for (%s)", mac))
+	delete(this.sessions, address)
+	this.logger.Session(fmt.Sprintf("Delete bot session for (%s)", address))
 }
 
 // RemoveAdminSession удаляет сессию админа
-func (this *SessionManager) RemoveAdminSession(mac string) {
+func (this *SessionManager) RemoveAdminSession(address string) {
 	this.mu.Lock()
 	defer this.mu.Unlock()
 
-	session, exists := this.sessions[mac]
+	session, exists := this.sessions[address]
 	if !exists {
-		this.logger.Warning(fmt.Sprintf("Tried to remove non-existent session for (%s)", mac))
+		this.logger.Warning(fmt.Sprintf("Tried to remove non-existent session for (%s)", address))
 		return
 	}
 
@@ -96,15 +96,15 @@ func (this *SessionManager) RemoveAdminSession(mac string) {
 		session.Client.OnBotDisconnect()
 	}
 
-	delete(this.sessions, mac)
-	this.logger.Session(fmt.Sprintf("Delete session for (%s)", mac))
+	delete(this.sessions, address)
+	this.logger.Session(fmt.Sprintf("Delete admin session for (%s)", address))
 }
 
 // TransitData отпарвляет команду на устройство
-func (this *SessionManager) TransitData(mac string, commandType uint8, commandData *string) {
-	session, exists := this.sessions[mac]
+func (this *SessionManager) TransitData(address string, commandType uint8, commandData *string) {
+	session, exists := this.sessions[address]
 	if !exists {
-		this.logger.Error(fmt.Sprintf("Session not found for MAC: (%s)", mac))
+		this.logger.Error(fmt.Sprintf("Session not found for ADDRESS: (%s)", address))
 		return
 	}
 

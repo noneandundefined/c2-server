@@ -8,7 +8,18 @@ import (
 	"icu/common/utils"
 	"icu/lib"
 	"net"
+	"sync"
+
+	jsoniter "github.com/json-iterator/go"
 )
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
+
+var receiveBufPool = sync.Pool{
+	New: func() any {
+		return make([]byte, 0, constants.MAX_PACKET_SIZE)
+	},
+}
 
 type ClientModule struct {
 	sock           net.Conn

@@ -170,3 +170,11 @@ main h2 {
 	align-items: center;
 	justify-content: space-between;
 }
+#date__release {
+	font-size: 14px;
+}
+
+#name__tag {
+	font-weight: 700;
+	font-size: 14px;
+}

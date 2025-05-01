@@ -47,24 +47,24 @@ h6 {
 	border-radius: 6px;
 	padding: 7px 35px;
 	font-weight: 600;
-    box-shadow: 0 0 70px 0 rgba(255, 255, 255, 0.5);
-    transition: 0.1s;
+	box-shadow: 0 0 70px 0 rgba(255, 255, 255, 0.5);
+	transition: 0.1s;
 }
 #welcome .welcome__div__buttons .welcome__button__intall:hover {
-    background-color: #d2d2d2;
-    color: #000;
-    box-shadow: 0 0 50px 0 rgba(255, 255, 255, 0.5);
-    transition: 0.2s;
+	background-color: #d2d2d2;
+	color: #000;
+	box-shadow: 0 0 50px 0 rgba(255, 255, 255, 0.5);
+	transition: 0.2s;
 }
 
 #welcome .welcome__div__buttons .welcome__link__source {
 	color: #ccc;
-    font-weight: 500;
-    transition: 0.05s;
+	font-weight: 500;
+	transition: 0.05s;
 }
 #welcome .welcome__div__buttons .welcome__link__source:hover {
-    color: #fff;
-    transition: 0.2s;
+	color: #fff;
+	transition: 0.2s;
 }
 
 #welcome .welcome__circle__div__animation {
@@ -74,8 +74,20 @@ h6 {
 	top: 50%;
 }
 #welcome .welcome__circle__div__animation .welcome__circle__one {
+	position: absolute;
+	transform: translate(-50%, -50%);
 	width: 40rem;
 	height: 40rem;
+	opacity: 0.4;
+	/* border: 1px solid #fff; */
+	box-shadow: 0 0 21px 0 rgba(255, 255, 255, 0.5);
+	border-radius: 50%;
+}
+#welcome .welcome__circle__div__animation .welcome__circle__two {
+	position: absolute;
+	transform: translate(-50%, -50%);
+	width: 30rem;
+	height: 30rem;
 	opacity: 0.4;
 	/* border: 1px solid #fff; */
 	box-shadow: 0 0 21px 0 rgba(255, 255, 255, 0.5);

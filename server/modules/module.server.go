@@ -170,6 +170,10 @@ func (this *TCPServer) handleAdmin(conn net.Conn, data []byte) {
 		this.logger.Info(fmt.Sprintf("CONNECTED ADMIN[%s]", conn.RemoteAddr().String()))
 	})
 
+	emitter.On("ddos-pack-received", func(received interface{}) {
+		fmt.Println(received)
+	})
+
 	emitter.On("error", func(error interface{}) {
 		this.logger.Error(error.(string))
 	})

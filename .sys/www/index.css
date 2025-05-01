@@ -51,6 +51,11 @@ header li:hover {
 	transition: 0.2s;
 }
 
+header .active {
+	color: #fff;
+	transition: 0.1s;
+}
+
 #welcome {
 	height: 100vh;
 	display: flex;

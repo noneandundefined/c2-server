@@ -144,7 +144,7 @@ jobs:
                   tag_name: ${{ steps.version.outputs.version }}
                   name: '${{ steps.version.outputs.version }}'
                   body: |
-                      Released a new version `${{ steps.version.outputs.version }}`! Designed to support bots, send commands, and exe application for hack user.
+                      A new version of the I Control You virus has been released "${{ steps.version.outputs.version }}"! Designed to support bots, send commands, and run an executable application to hack users.
 
                       ${{ steps.changelog.outputs.changelog_issues_by_label }}
 

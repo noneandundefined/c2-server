@@ -21,7 +21,6 @@ typedef struct {
     uint16_t size;
     uint8_t version;
     uint8_t type;
-    uint8_t c_type;
     uint8_t crc;
     char urls[];
 } DDOSPacket;

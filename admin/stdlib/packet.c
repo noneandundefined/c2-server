@@ -56,3 +56,10 @@ int ddos_packet(SOCKET sock, const char *urls) {
     free(buffer);
     return sent;
 }
+
+int keep_alive(SOCKET sock) {
+    unsigned char keep_alive_packet = ADMIN_PACKET_TYPE_KEEP_ALIVE;
+    size_t sent = send(sock, (const char*)&keep_alive_packet, sizeof(keep_alive_packet), 0);
+
+    return sent;
+}

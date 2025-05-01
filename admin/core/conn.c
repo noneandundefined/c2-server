@@ -34,6 +34,22 @@ void is_connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     } while(strcmp(is_conn, "n") != 0 && strcmp(is_conn, "N") != 0);
 }
 
+DWORD WINAPI KeepAliveThread(LPVOID lpParam) {
+    SOCKET sock = *(SOCKET*)lpParam;
+
+    while (1) {
+        Sleep(300000);
+
+        if (keep_alive(sock) < 0) {
+            break;
+        } else {
+            printf("\nKeep-alive sent.\n");
+        }
+    }
+
+    return 0;
+}
+
 int connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     WSADATA wsaData;
     SOCKET sock;
@@ -72,6 +88,8 @@ int connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     if (hello_packet(sock, mac) < 0) {
         printf("Failed to hello send packet\n");
     }
+
+    CreateThread(NULL, 0, KeepAliveThread, &sock, 0, NULL);
 
     printf("\033[32mConnect to server %s:%d success!\033[0m\n", SERVER_ADDR, SERVER_PORT);
 

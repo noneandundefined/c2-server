@@ -28,4 +28,6 @@ typedef struct {
 
 int ddos_packet(SOCKET sock, const char *urls);
 
+int keep_alive(SOCKET sock);
+
 #endif

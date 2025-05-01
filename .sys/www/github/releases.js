@@ -27,6 +27,10 @@ async function fetchReleases() {
 				showReleaseDetails(release);
 			}
 		});
+
+		if (releases.length > 0) {
+			showReleaseDetails(releases[0]);
+		}
 	} catch (err) {
 		console.error(err);
 	}

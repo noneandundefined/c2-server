@@ -1,11 +1,10 @@
 header {
 	display: flex;
 	justify-content: center;
-	/* position: fixed; */
 	background: rgba(255, 255, 255, 0.1);
 	font-family: 'JetBrains Mono', monospace;
-	font-size: 15px;
-	padding: 5px 0;
+	font-size: 14px;
+	padding: 14px 0;
 	width: 100%;
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }

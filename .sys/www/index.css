@@ -150,3 +150,8 @@ header .active {
 	box-shadow: 0 0 50px 0 rgba(189, 189, 189, 0.3);
 	border-radius: 50%;
 }
+
+
+#versions {
+	margin: 0 20rem;
+}

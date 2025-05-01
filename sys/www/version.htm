@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+			rel="stylesheet"
+		/>
+		<script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+		<link rel="stylesheet" href="./style/version.css" />
+		<link rel="stylesheet" href="./index.css" />
+		<script src="./github/releases.js" defer></script>
+		<title>Versions - I Control You</title>
+	</head>
+	<body>
+		<header>
+			<ul>
+				<li><a href="index.htm">Installer</a></li>
+				<li class="active"><a href="version.htm">Version</a></li>
+				<li>
+					<a href="https://github.com/noneandundefined/icu"
+						>Source Code</a
+					>
+				</li>
+			</ul>
+		</header>
+		<div class="container">
+			<aside>
+				<h3>Versions</h3>
+				<ul id="releases-list">
+					<!-- динамически -->
+				</ul>
+			</aside>
+
+			<main>
+				<div class="header__release">
+					<h2 id="name__tag"></h2>
+					<small style="color: gray" id="date__release"></small>
+				</div>
+				<div class="downloads">
+					<div id="windows__assets">
+						<p>Windows</p>
+						<!-- динамически -->
+					</div>
+				</div>
+
+				<div class="section">
+					<p id="description__release">
+						<!-- динамически -->
+					</p>
+				</div>
+			</main>
+
+			<div class="right">
+				<p><strong>Дополнительно</strong></p>
+				<ul>
+					<li>
+						<a href="https://github.com/noneandundefined/icu"
+							>ICU @github</a
+						>
+					</li>
+					<li>
+						<a
+							href="https://github.com/noneandundefined/icu/blob/main/docs/Developer.EN.md"
+							>ICU for Developer</a
+						>
+					</li>
+					<li>
+						<a
+							href="https://github.com/noneandundefined/icu/blob/main/docs/Documentation.EN.md"
+							>ICU Documentation</a
+						>
+					</li>
+					<li>
+						<a
+							href="https://github.com/noneandundefined/icu/blob/main/docs/Install.EN.md"
+							>Install ICU</a
+						>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

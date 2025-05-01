@@ -10,11 +10,11 @@ async function fetchReleases() {
 		listEl.innerHTML = releases
 			.map(
 				(release) => `
-          <li>
-            <a href="#" data-id="${release.id}">${
+            <li>
+                <a href="#" data-id="${release.id}">${
 					release.name || release.tag_name
 				}</a>
-          </li>
+            </li>
         `
 			)
 			.join('');

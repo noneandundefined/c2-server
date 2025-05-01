@@ -28,7 +28,7 @@ a {
 header {
 	display: flex;
 	justify-content: center;
-	position: fixed;
+	/* position: fixed; */
 	background: rgba(255, 255, 255, 0.1);
 	font-family: 'Outfit', sans-serif;
 	font-size: 15px;
@@ -151,7 +151,33 @@ header .active {
 	border-radius: 50%;
 }
 
-
 #versions {
 	margin: 0 20rem;
+	margin-top: 5rem;
+	border-left: 1px solid #fff;
+}
+
+#versions .v {
+	padding-left: 20px;
+	font-size: 13px;
+	color: #999;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+#versions .releases__list {
+
+}
+#versions #releases-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+#versions #releases-list li {
+	cursor: pointer;
+	padding-left: 20px;
+}
+#versions #releases-list li:hover {
+	background: #ffffff1a;
+}
+#versions .release__details {
 }

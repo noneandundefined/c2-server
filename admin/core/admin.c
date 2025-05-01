@@ -21,6 +21,9 @@ uint8_t input() {
         printf("\n\033[31m[~]\033[0m \033[32mSelect an option:\033[0m ");
         scanf("%hhu", &action);
 
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
+
         if (action < 1 || action > 5) {
             printf("\033[31mInvalid selection: %d. Try again.\033[0m\n", action);
             continue;

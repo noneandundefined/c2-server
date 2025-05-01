@@ -3,7 +3,6 @@ body {
 	color: #fff;
 
 	padding: 0;
-	margin: 0 10rem;
 }
 
 h1,
@@ -18,7 +17,14 @@ h6 {
 
 header {
 	display: flex;
+	position: fixed;
 	background: rgba(255, 255, 255, 0.1);
+	width: 100%;
+}
+
+header ul {
+	display: flex;
+	gap: 2rem;
 }
 
 #welcome {

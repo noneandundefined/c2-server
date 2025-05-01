@@ -16,6 +16,11 @@ h6 {
 	letter-spacing: 0.3px;
 }
 
+header {
+	display: flex;
+	background: rgba(255, 255, 255, 0.1);
+}
+
 #welcome {
 	height: 100vh;
 	display: flex;

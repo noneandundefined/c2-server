@@ -1,8 +1,12 @@
-# `I Control You`
+# I Control You
 
-<img src="https://github.com/noneandundefined/icu/blob/v0.8.x/assets/icu_start.png?raw=true" align="center" />
+[![CI](https://github.com/zed-industries/zed/actions/workflows/ci.yml/badge.svg)](https://github.com/zed-industries/zed/actions/workflows/ci.yml)
 
-Open Source (command and control server). Designed to support bots, send commands, and implement DDL dependencies.
+Welcome to ICU, designed to support bots, send commands, and run an application to hack a user.
+
+---
+
+<img src="https://github.com/noneandundefined/icu/blob/docs/assets/icu-home.png?raw=true" align="center" />
 
 ## Responsibility
 

@@ -15,19 +15,40 @@ h6 {
 	letter-spacing: 0.3px;
 }
 
+p,
+ul,
+li,
+button,
+input,
+textarea,
+a {
+	font-family: 'Outfit', sans-serif;
+}
+
 header {
 	display: flex;
 	justify-content: center;
 	position: fixed;
 	background: rgba(255, 255, 255, 0.1);
-	font-family: "Roboto Mono", monospace;
+	font-family: 'Outfit', sans-serif;
+	font-size: 15px;
+	padding: 5px 0;
 	width: 100%;
 }
 
 header ul {
 	display: flex;
 	cursor: pointer;
-	gap: 2rem;
+	gap: 6rem;
+}
+
+header li {
+	color: #999;
+	transition: 0.1s;
+}
+header li:hover {
+	color: #fff;
+	transition: 0.2s;
 }
 
 #welcome {

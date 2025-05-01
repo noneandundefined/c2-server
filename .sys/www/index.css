@@ -103,3 +103,13 @@ h6 {
 	box-shadow: 0 0 21px 0 rgba(255, 255, 255, 0.5);
 	border-radius: 50%;
 }
+#welcome .welcome__circle__div__animation .welcome__circle__four {
+	position: absolute;
+	transform: translate(-50%, -50%);
+	width: 10rem;
+	height: 10rem;
+	opacity: 0.4;
+	/* border: 1px solid #fff; */
+	box-shadow: 0 0 21px 0 rgba(255, 255, 255, 0.5);
+	border-radius: 50%;
+}

@@ -66,3 +66,18 @@ h6 {
     color: #fff;
     transition: 0.2s;
 }
+
+#welcome .welcome__circle__div__animation {
+	position: absolute;
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 50%;
+}
+#welcome .welcome__circle__div__animation .welcome__circle__one {
+	width: 40rem;
+	height: 40rem;
+	opacity: 0.4;
+	/* border: 1px solid #fff; */
+	box-shadow: 0 0 21px 0 rgba(255, 255, 255, 0.5);
+	border-radius: 50%;
+}

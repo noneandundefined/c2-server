@@ -1,8 +1,27 @@
-# `I Control You`
+# I Control You
 
-<img src="https://github.com/noneandundefined/icu/blob/v0.8.x/assets/icu_start.png?raw=true" align="center" />
+[![CI](https://github.com/zed-industries/zed/actions/workflows/ci.yml/badge.svg)](https://github.com/zed-industries/zed/actions/workflows/ci.yml)
 
-Open Source (command and control server). Designed to support bots, send commands, and implement DDL dependencies.
+Welcome to ICU, designed to support bots, send commands, and run an application to hack a user.
+
+---
+
+<img src="https://github.com/noneandundefined/icu/blob/main/assets/icu-home.png?raw=true" align="center" />
+
+## Documentation
+
+-   [Documentation](https://github.com/noneandundefined/icu/blob/main/docs/Documentation.EN.md)
+-   [For Developer](https://github.com/noneandundefined/icu/blob/main/docs/Developer.EN.md)
+-   [Install ICU and Admin](https://github.com/noneandundefined/icu/blob/main/docs/Install.EN.md)
+-   [ICU for anothers systems](https://github.com/noneandundefined/icu/blob/main/docs/System.EN.md)
+
+## Versions
+
+| ICU Version | Release Date | Notes                                                                 |
+| ----------- | ------------ | --------------------------------------------------------------------- |
+| 0.16.55     | 2025/05/01   | [tag v0.16.55](https://github.com/noneandundefined/icu/tree/v0.16.55) |
+| 0.11.10     | 2025/04/30   | [tag v0.11.10](https://github.com/noneandundefined/icu/tree/v0.11.10) |
+| 0.1.0       | 2025/04/18   | [tag v0.1.0](https://github.com/noneandundefined/icu/tree/v0.1.0)     |
 
 ## Responsibility
 

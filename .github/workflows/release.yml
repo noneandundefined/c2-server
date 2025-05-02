@@ -105,10 +105,38 @@ jobs:
                         });
 
                         const closedIssues = issues.filter(issue => !issue.pull_request && new Date(issue.closed_at) > new Date(since));
-                        const issueChangelog = closedIssues.map(issue => `- ${issue.title} (#${issue.number})`).join("\n");
+
+                        const labelGroups = {};
+                        closedIssues.forEach(issue => {
+                          if (issue.labels.length === 0) {
+                            if (!labelGroups["Other"]) labelGroups["Other"] = [];
+                            labelGroups["Other"].push(issue);
+                          } else {
+                            issue.labels.forEach(label => {
+                              const name = label.name;
+                              if (!labelGroups[name]) labelGroups[name] = [];
+                              labelGroups[name].push(issue);
+                            });
+                          }
+                        });
+
+                        let issueChangelogByLabel = "";
+                        const labelTitles = {
+                          new: "## Enhancements",
+                          bug: "## Bug Fixes",
+                          windows: "## Windows",
+                          linux: "## Linux",
+                          Other: "## Other"
+                        };
+
+                        for (const [label, items] of Object.entries(labelGroups)) {
+                          const title = labelTitles[label] || `## ${label.charAt(0).toUpperCase() + label.slice(1)}`;
+                          const list = items.map(issue => `- ${issue.title} (#${issue.number})`).join("\n");
+                          issueChangelogByLabel += `${title}\n\n${list}\n\n`;
+                        }
 
                         core.setOutput("changelog_pr", prChangelog);
-                        core.setOutput("changelog_issue", issueChangelog);
+                        core.setOutput("changelog_issues_by_label", issueChangelogByLabel.trim());
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v1
@@ -116,13 +144,9 @@ jobs:
                   tag_name: ${{ steps.version.outputs.version }}
                   name: '${{ steps.version.outputs.version }}'
                   body: |
-                      # [${{ steps.version.outputs.version }}](https://github.com/noneandundefined/icu/tree/${{ steps.version.outputs.version }}) (${{ steps.date.outputs.date }})
+                      A new version of the I Control You virus has been released "${{ steps.version.outputs.version }}"! Designed to support bots, send commands, and run an executable application to hack users.
 
-                      Released a new version `${{ steps.version.outputs.version }}`! Designed to support bots, send commands, and exe application for hack user.
-
-                      ## Enhancements
-
-                      ${{ steps.changelog.outputs.changelog_issue }}
+                      ${{ steps.changelog.outputs.changelog_issues_by_label }}
 
                       ### Pull Requests
                       ${{ steps.changelog.outputs.changelog_pr }}

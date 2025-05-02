@@ -41,3 +41,4 @@ gcc x86_x64.c -o "source/VIRUS.exe" stdlib/ICU_log.c core/ICU_bot.c stdlib/ICU_i
 ```
 
 2. После чего перейдите в `cd sys/windows/windows`, готово! вы найдете файл exe
+

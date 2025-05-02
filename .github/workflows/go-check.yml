@@ -43,7 +43,9 @@ jobs:
                   fi
 
             - name: Run golangci-lint
-              run: make lint
+              run: |
+                  cd server
+                  make lint
 
             - name: Build binary
               run: |

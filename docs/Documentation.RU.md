@@ -6,9 +6,9 @@ ICU вирус представляет собой инструмент для �
 
 ## Раздел документации
 
--   [Документация для разработчиков](https://github.com/noneandundefined/icu/blob/docs/docs/Developer.RU.md)
--   [Документация по системе](https://github.com/noneandundefined/icu/blob/docs/docs/System.RU.md)
--   [Документация по руководству пользователя](https://github.com/noneandundefined/icu/blob/docs/docs/Install.RU.md)
+-   [Документация для разработчиков](https://github.com/noneandundefined/icu/blob/main/docs/Developer.RU.md)
+-   [Документация по системе](https://github.com/noneandundefined/icu/blob/main/docs/System.RU.md)
+-   [Документация по руководству пользователя](https://github.com/noneandundefined/icu/blob/main/docs/Install.RU.md)
 
 ## Note
 

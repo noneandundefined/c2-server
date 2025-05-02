@@ -14,5 +14,5 @@
 -   Переди на вкладку releases - [releases](https://github.com/noneandundefined/icu/releases)
 -   Выбри последний релиз (Latest) или v1.0.0
 -   В описании релиза в Assets установи (exe или tar или zip)
--   Установки админ части перейди в [admin.exe](https://github.com/noneandundefined/icu/tree/docs/admin/source) и установи exe
+-   Установки админ части перейди в [admin.exe](https://github.com/noneandundefined/icu/tree/main/admin/source) и установи exe
 -   Для использования своего сервера колинуруй репозиторий и смотри документацию для разработчиков

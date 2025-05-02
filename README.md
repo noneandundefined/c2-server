@@ -6,14 +6,14 @@ Welcome to ICU, designed to support bots, send commands, and run an application 
 
 ---
 
-<img src="https://github.com/noneandundefined/icu/blob/docs/assets/icu-home.png?raw=true" align="center" />
+<img src="https://github.com/noneandundefined/icu/blob/main/assets/icu-home.png?raw=true" align="center" />
 
 ## Documentation
 
--   [Documentation](https://github.com/noneandundefined/icu/blob/docs/docs/Documentation.EN.md)
--   [For Developer](https://github.com/noneandundefined/icu/blob/docs/docs/Developer.EN.md)
--   [Install ICU and Admin](https://github.com/noneandundefined/icu/blob/docs/docs/Install.EN.md)
--   [ICU for anothers systems](https://github.com/noneandundefined/icu/blob/docs/docs/System.EN.md)
+-   [Documentation](https://github.com/noneandundefined/icu/blob/main/docs/Documentation.EN.md)
+-   [For Developer](https://github.com/noneandundefined/icu/blob/main/docs/Developer.EN.md)
+-   [Install ICU and Admin](https://github.com/noneandundefined/icu/blob/main/docs/Install.EN.md)
+-   [ICU for anothers systems](https://github.com/noneandundefined/icu/blob/main/docs/System.EN.md)
 
 ## Versions
 

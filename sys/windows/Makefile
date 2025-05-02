@@ -46,6 +46,7 @@ clean:
 appdata_c:
 	copy /Y "$(HOME)\sys\windows\source\$(SCRIPT_NAME)" "$(APPDATA_OUT)"
 	attrib +h "$(APPDATA_OUT)\$(SCRIPT_NAME)"
+
 appdata_d:
 	del /Q "$(APPDATA_OUT)\$(SCRIPT_NAME)"
 

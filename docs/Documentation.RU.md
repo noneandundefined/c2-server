@@ -1,16 +1,14 @@
-# `ICU` I Control You (Русская версия)
+# `ICU` I Control You
+
+# Документация (Русская версия)
 
 ICU вирус представляет собой инструмент для контроля других ПК, обеспечивая возможности удаленного управления и мониторинга и DDoS атак. В этой документации будет представлено подробное описание функционала и разработки.
 
 ## Раздел документации
 
-1. Документация для разработчиков
-2. Документация по системе
-3. Документация по руководству пользователя
-
-4. [Документация для разработчиков](https://github.com/noneandundefined/icu/blob/docs/docs/Developer.RU.md)
-5. [Документация по системе](https://github.com/noneandundefined/icu/blob/docs/docs/System.RU.md)
-6. [Документация по руководству пользователя](https://github.com/noneandundefined/icu/blob/docs/docs/Install.RU.md)
+-   [Документация для разработчиков](https://github.com/noneandundefined/icu/blob/docs/docs/Developer.RU.md)
+-   [Документация по системе](https://github.com/noneandundefined/icu/blob/docs/docs/System.RU.md)
+-   [Документация по руководству пользователя](https://github.com/noneandundefined/icu/blob/docs/docs/Install.RU.md)
 
 ## Note
 

@@ -6,10 +6,10 @@ The ICU virus is a tool for controlling other PCs, providing remote control and 
 
 ## Documentation section
 
-1. For developers documentation
-2. System documentation
-3. User's guide documentation
+-   [Developer Documentation](https://github.com/noneandundefined/icu/blob/docs/docs/Developer.EN.md)
+-   [System Documentation](https://github.com/noneandundefined/icu/blob/docs/docs/System.EN.md)
+-   [User Manual Documentation](https://github.com/noneandundefined/icu/blob/docs/docs/Install.EN.md)
 
 ## Note
 
-> This project is intended for legal use ONLY. Any use of this code for illegal purposes is strictly prohibited. The developers are not responsible for the illegal use of this software.
+> This project is intended for legal use only. Any use of this code for illegal purposes is strictly prohibited. The developers are not responsible for the illegal use of this software.

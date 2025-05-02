@@ -18,10 +18,13 @@ jobs:
                   go-version: '1.23.0'
 
             - name: Install dependencies
-              run: go mod download
+              run: |
+                  cd server
+                  go mod download
 
             - name: Run gofmt
               run: |
+                  cd server
                   if [ -n "$(gofmt -l .)" ]; then
                     echo "Some files are not formatted. Please run 'gofmt -w .'"
                     gofmt -l .
@@ -30,6 +33,7 @@ jobs:
 
             - name: Run goimports
               run: |
+                  cd server
                   go install golang.org/x/tools/cmd/goimports@latest
                   if [ -n "$(goimports -l .)" ]; then
                     echo "Some files have incorrect imports. Please run 'goimports -w .'"
@@ -41,8 +45,10 @@ jobs:
               uses: golangci/golangci-lint-action@v3
               with:
                   version: latest
+                  args: run ./server
 
             - name: Build binary
               run: |
+                  cd server
                   mkdir -p bin
                   go build -o bin/icu main.go

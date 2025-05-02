@@ -1,0 +1,30 @@
+name: Static C Check
+
+on:
+    pull_request:
+        branches: [main]
+
+jobs:
+    c_check:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Install tools
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y cppcheck clang flawfinder
+
+            - name: Cppcheck analysis
+              run: |
+                  cppcheck --enable=all --inconclusive --force --quiet admin/ sys/windows/
+
+            - name: Clang static analysis
+              run: |
+                  scan-build --use-cc=clang gcc -c admin/*.c sys/windows/*.c
+
+            - name: Security audit with Flawfinder
+              run: |
+                  flawfinder admin/ sys/windows/

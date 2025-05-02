@@ -28,8 +28,6 @@ DWORD WINAPI cs_recyclebin(LPVOID lpParam) {
         " }\"", script_name
     );
 
-    MessageBoxA(NULL, "Привет из DLL в проводнике!", "Injected", MB_OK);
-
     info_log("cs_recyclebin: watching for file");
     info_log(pscmd);
 

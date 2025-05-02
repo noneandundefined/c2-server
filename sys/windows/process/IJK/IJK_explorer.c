@@ -26,11 +26,11 @@ DWORD GetExplorerPID() {
 }
 
 int main() {
-    char* ddl_paths = get_env_value("DLL_PATH");
+    char* dll_paths = get_env_value("DLL_PATH");
     char* explorer_dll = get_env_value("DLL_EXPLORER");
 
     char dllPath[MAX_PATH];
-    snprintf(dllPath, MAX_PATH, "%s\\%s", ddl_paths, explorer_dll);
+    snprintf(dllPath, MAX_PATH, "%s\\%s", dll_paths, explorer_dll);
 
     DWORD pid = GetExplorerPID();
     if (!pid) {

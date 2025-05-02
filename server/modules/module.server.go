@@ -2,7 +2,6 @@ package modules
 
 import (
 	"encoding/hex"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"icu/common/constants"
@@ -169,6 +168,10 @@ func (this *TCPServer) handleAdmin(conn net.Conn, data []byte) {
 		this.cache.NewInitial(conn.RemoteAddr().String())
 		this.session.NewAdminSession(conn.RemoteAddr().String(), clientModule)
 		this.logger.Info(fmt.Sprintf("CONNECTED ADMIN[%s]", conn.RemoteAddr().String()))
+	})
+
+	emitter.On("ddos-pack-received", func(received interface{}) {
+		fmt.Println(received)
 	})
 
 	emitter.On("error", func(error interface{}) {

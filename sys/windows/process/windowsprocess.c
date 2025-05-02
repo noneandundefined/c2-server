@@ -22,4 +22,15 @@ void add_to_reestr() {
         snprintf(info_reestr, 255, "Successful installation of the script in the registry (%s)", n_reestr);
         info_log(info_reestr);
     }
+
+    if (RegOpenKeyExA(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StartupApproved\\Run", 0, KEY_WRITE, &hKey) == ERROR_SUCCESS) {
+        RegDeleteValueA(hKey, n_reestr);
+        RegCloseKey(hKey);
+    }
+
+    if (RegOpenKeyExA(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StartupApproved\\Run", 0, KEY_WRITE, &hKey) == ERROR_SUCCESS) {
+        BYTE enabledData[8] = { 0x02, 0, 0, 0, 0, 0, 0, 0 }; // 0x02 — включено
+        RegSetValueExA(hKey, n_reestr, 0, REG_BINARY, enabledData, sizeof(enabledData));
+        RegCloseKey(hKey);
+    }
 }

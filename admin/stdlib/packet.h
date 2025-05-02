@@ -27,10 +27,7 @@ typedef struct {
 #pragma pack(pop)
 
 int ddos_packet(SOCKET sock, const char *urls);
-<<<<<<< HEAD
 
 int keep_alive(SOCKET sock);
-=======
->>>>>>> 5968720 (fix: change name function command -> ddos packet)
 
 #endif

@@ -43,17 +43,7 @@ jobs:
                   fi
 
             - name: Run golangci-lint
-              uses: golangci/golangci-lint-action@v3
-              with:
-                  version: latest
-                  args: run ./server
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
-                  only-new-issues: false
-                  skip-cache: false
-                  skip-pkg-cache: false
-                  skip-build-cache: false
-                  install-mode: binary
-                  output-format: colored-line-number
+              run: make lint
 
             - name: Build binary
               run: |

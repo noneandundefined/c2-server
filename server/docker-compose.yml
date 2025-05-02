@@ -2,11 +2,11 @@ version: '3.8'
 services:
     tcp_service:
         build:
-            context: ./server
+            context: .
             dockerfile: Dockerfile
         environment:
             - SERVER_ADDR=127.0.0.1
-            - SERVER_PORT=12345
+            - SERVER_PORT=49435
         ports:
             - '49435:49435'
         mem_limit: 1536m
